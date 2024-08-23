@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/NestorNebula/inventory-application/issues"
   },
-  "homepage": "https://github.com/NestorNebula/inventory-application#readme"
+  "homepage": "https://github.com/NestorNebula/inventory-application#readme",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
 }
