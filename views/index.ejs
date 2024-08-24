@@ -3,7 +3,27 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title><%= title %></title>
   </head>
-  <body></body>
+  <body>
+    <header>
+      <div><%= title %></div>
+    </header>
+    <main>
+      <section>
+        <% genres.forEach((genre) => { %>
+        <a href="/genre/<%= genre.id %>">
+          <div><%= genre.genre %></div>
+        </a>
+        <% }) %>
+      </section>
+      <section>
+        <% authors.forEach((author) => { %>
+        <a href="/author/<%= author.id %>">
+          <div><%= author.name %></div>
+        </a>
+        <% }) %>
+      </section>
+    </main>
+  </body>
 </html>
