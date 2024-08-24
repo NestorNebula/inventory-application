@@ -16,5 +16,10 @@ app.use('/genre', genresRouter);
 app.use('/author', authorsRouter);
 app.use('/book', booksRouter);
 
+app.use((err, req, res, next) => {
+  console.error(err);
+  res.render('error', { error: err });
+});
+
 const PORT = process.env.PORT;
 app.listen(PORT);
