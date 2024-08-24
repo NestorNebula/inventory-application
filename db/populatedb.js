@@ -24,6 +24,14 @@ CREATE TABLE IF NOT EXISTS books_genres (
   book_id INTEGER REFERENCES books(id),
   genre_id INTEGER REFERENCES genres(id)
 );
+
+INSERT INTO genres (genre)
+VALUES
+  ('Action/Adventure'), ('Biography'), ('Classic'), ('Comic/Graphic Novel'), ('Dystopian'), ('Essay'), ('Fantasy'), ('Historical Fiction'), ('Horror'), ('Mystery'), ('Poetry'), ('Romance'), ('Science Fiction'), ('Suspense/Thriller'); 
+
+INSERT INTO authors (name)
+VALUES
+  ('Lewis Carroll'), ('Agatha Christie'), ('Paulo Coelho'), ('Ian Fleming'), ('Stephen King'), ('Masashi Kishimoto'), ('C. S. Lewis'), ('Stephenie Meyer'), ('James Patterson'), ('Beatrix Potter'), ('Anne Rice'), ('J. K. Rowling'), ('William Shakespeare'), ('Georges Simenon'), ('J. R. R. Tolkien'), ('Leo Tolstoy'), ('Akira Toriyama');
 `;
 
 async function main() {
