@@ -9,7 +9,8 @@ CREATE TABLE IF NOT EXISTS authors (
 
 CREATE TABLE IF NOT EXISTS genres (
   id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-  genre VARCHAR(20) NOT NULL
+  genre VARCHAR(20) NOT NULL,
+  image VARCHAR(20)
 );
 
 CREATE TABLE IF NOT EXISTS books (
@@ -25,9 +26,9 @@ CREATE TABLE IF NOT EXISTS books_genres (
   genre_id INTEGER REFERENCES genres(id)
 );
 
-INSERT INTO genres (genre)
+INSERT INTO genres (genre, image)
 VALUES
-  ('Action/Adventure'), ('Biography'), ('Classic'), ('Comic/Graphic Novel'), ('Dystopian'), ('Essay'), ('Fantasy'), ('Historical Fiction'), ('Horror'), ('Mystery'), ('Poetry'), ('Romance'), ('Science Fiction'), ('Suspense/Thriller'); 
+  ('Action/Adventure', 'adventure.jpeg'), ('Biography', 'biography.jpg'), ('Classic', 'classic.jpg'), ('Comic/Graphic Novel', 'comics.jpg'), ('Dystopian', 'dystopia.jpg'), ('Essay', 'essay.jpg'), ('Fantasy', 'fantasy.jpg'), ('Historical Fiction', 'historical.jpg'), ('Horror', 'horror.jpg'), ('Mystery', 'mystery.jpg'), ('Poetry', 'poetry.jpg'), ('Romance', 'romance.jpg'), ('Science Fiction', 'sciencefiction.jpg'), ('Suspense/Thriller', 'thriller.jpg'); 
 
 INSERT INTO authors (name)
 VALUES
