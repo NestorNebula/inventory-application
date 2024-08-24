@@ -14,6 +14,7 @@
         <% genres.forEach((genre) => { %>
         <a href="/genre/<%= genre.id %>">
           <div><%= genre.genre %></div>
+          <img src="/assets/images/<%= genre.image %>" alt="" />
         </a>
         <% }) %>
       </section>
