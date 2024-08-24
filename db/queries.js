@@ -1,8 +1,15 @@
 const pool = require('./pool');
 
 // GENERAL QUERIES
-// getAllGenres
-// getAllAuthors
+async function getAllGenres() {
+  const { rows } = await pool.query('SELECT * FROM genres');
+  return rows;
+}
+
+async function getAllAuthors() {
+  const { rows } = await pool.query('SELECT * FROM authors');
+  return rows;
+}
 
 // GENRES QUERIES
 // getGenre(id)
@@ -30,3 +37,5 @@ const pool = require('./pool');
 // deleteBookOffGenres(bookId)
 // deleteGenreOffBooks(genreId)
 // insertBookGenre(bookId, genreId)
+
+module.exports = { getAllGenres, getAllAuthors };
