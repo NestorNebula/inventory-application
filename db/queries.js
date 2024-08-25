@@ -48,8 +48,13 @@ async function getBooksByAuthor(id) {
 // insertAuthor(author)
 
 // BOOKS QUERIES
-// getBook(id)
-// getBookInformation(id)
+async function getBookInformations(id) {
+  const { rows } = await pool.query(
+    'SELECT title, pages, plot, author_id, genre_id, genre, name FROM books AS b INNER JOIN books_genres AS bg ON b.id = bg.book_id INNER JOIN genres AS g ON bg.genre_id = g.id INNER JOIN authors AS a ON b.author_id = a.id WHERE b.id = $1',
+    [id]
+  );
+  return rows;
+}
 // updateBook(book)
 // deleteBook(id)
 // insertBook(book)
@@ -67,4 +72,5 @@ module.exports = {
   getBooksByGenre,
   getAuthor,
   getBooksByAuthor,
+  getBookInformations,
 };
