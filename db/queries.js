@@ -50,7 +50,7 @@ async function getBooksByAuthor(id) {
 // BOOKS QUERIES
 async function getBookInformations(id) {
   const { rows } = await pool.query(
-    'SELECT title, pages, plot, author_id, genre_id, genre, name FROM books AS b INNER JOIN books_genres AS bg ON b.id = bg.book_id INNER JOIN genres AS g ON bg.genre_id = g.id INNER JOIN authors AS a ON b.author_id = a.id WHERE b.id = $1',
+    'SELECT title, pages, plot, author_id, genre_id, genre, name FROM books AS b LEFT JOIN books_genres AS bg ON b.id = bg.book_id LEFT JOIN genres AS g ON bg.genre_id = g.id LEFT JOIN authors AS a ON b.author_id = a.id WHERE b.id = $1',
     [id]
   );
   return rows;
