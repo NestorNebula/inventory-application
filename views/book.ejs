@@ -15,7 +15,7 @@
       <a href="/author/<%= book.author_id %>"><%= book.author_id %></a>
       <div>
         <div>Genres:</div>
-        <% genres.forEach((genre) { %>
+        <% genres.forEach((genre) => { %>
         <a href="/genre/<%= genre.genre_id %>"><%= genre.genre %></a>
         <% }) %>
       </div>
