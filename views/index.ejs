@@ -25,6 +25,58 @@
         </a>
         <% }) %>
       </section>
+      <section>
+        <div>
+          <button>+</button>
+          <div>Add a Book</div>
+          <form action="/book" method="POST">
+            <label for="title">Title:</label>
+            <input type="text" name="title" id="title" required />
+            <label for="pages">Pages:</label>
+            <input type="number" name="pages" id="pages" required />
+            <label for="plot">Plot:</label>
+            <textarea name="plot" id="plot"></textarea>
+            <label for="author_name">Author:</label>
+            <select name="author_name" id="author_name">
+              <option value="none">Not in the list</option>
+              <% authors.forEach((author) => { %>
+              <option value="<%= author.id %>"><%= author.name %></option>
+              <% }) %>
+            </select>
+            <fieldset>
+              <legend>Add at least one genre for the Book</legend>
+              <% genres.forEach((genre) => { %>
+              <input
+                type="checkbox"
+                value="<%= genre.id %>"
+                name="book_genres"
+                id="genre <%= genre.id %>"
+              />
+              <label for="genre <%= genre.id %>"><%= genre.genre %></label>
+              <% }) %>
+            </fieldset>
+            <button type="submit">Submit Book</button>
+          </form>
+        </div>
+        <div>
+          <button>+</button>
+          <div>Add a Genre</div>
+          <form action="/genre" method="POST">
+            <label for="newgenre">Genre:</label>
+            <input type="text" id="newgenre" name="newgenre" />
+            <button type="submit">Submit Genre</button>
+          </form>
+        </div>
+        <div>
+          <button>+</button>
+          <div>Add an Author</div>
+          <form action="/author" method="POST">
+            <label for="newauthor">Author:</label>
+            <input type="text" name="newauthor" id="newauthor" />
+            <button type="submit">Submit Author</button>
+          </form>
+        </div>
+      </section>
     </main>
   </body>
 </html>
