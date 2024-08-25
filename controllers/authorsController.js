@@ -1,7 +1,7 @@
 const db = require('../db/queries');
 const customError = require('../modules/error');
 
-function getAuthor(req, res) {
+function getAuthor(req, res, next) {
   const author = db.getAuthor(req.params.author);
   const books = db.getBooksByAuthor(req.params.author);
   Promise.all([author, books])
@@ -10,10 +10,12 @@ function getAuthor(req, res) {
     })
     .catch((error) => {
       console.error(error);
-      throw new customError(
-        "The server couldn't load the data you required.",
-        500,
-        'Server Error'
+      next(
+        new customError(
+          "The server couldn't load the data you required.",
+          500,
+          'Server Error'
+        )
       );
     });
 }

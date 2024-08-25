@@ -1,7 +1,7 @@
 const db = require('../db/queries');
 const customError = require('../modules/error');
 
-function getIndexPage(req, res) {
+function getIndexPage(req, res, next) {
   const genres = db.getAllGenres();
   const authors = db.getAllAuthors();
   Promise.all([genres, authors])
@@ -14,10 +14,12 @@ function getIndexPage(req, res) {
     })
     .catch((error) => {
       console.error(error);
-      throw new customError(
-        "The server couldn't load the data.",
-        500,
-        'Server Error'
+      next(
+        new customError(
+          "The server couldn't load the data.",
+          500,
+          'Server Error'
+        )
       );
     });
 }
