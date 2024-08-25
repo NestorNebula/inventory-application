@@ -36,8 +36,8 @@
             <input type="number" name="pages" id="pages" required />
             <label for="plot">Plot:</label>
             <textarea name="plot" id="plot"></textarea>
-            <label for="author_name">Author:</label>
-            <select name="author_name" id="author_name">
+            <label for="author_id">Author:</label>
+            <select name="author_id" id="author_id">
               <option value="none">Not in the list</option>
               <% authors.forEach((author) => { %>
               <option value="<%= author.id %>"><%= author.name %></option>
