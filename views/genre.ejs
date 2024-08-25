@@ -3,7 +3,19 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title><%= genre.genre %> Books</title>
   </head>
-  <body></body>
+  <body>
+    <header>
+      <div><%= genre.genre %> Books</div>
+    </header>
+    <% if (books.length) { %> <% books.forEach((book) => { %>
+    <div>
+      <div><%= book.title %></div>
+      <div><%= book.pages %></div>
+    </div>
+    <% }) %> <% } else { %>
+    <div>No Books for the "<%= genre.genre %>" genre.</div>
+    <% } %>
+  </body>
 </html>
