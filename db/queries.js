@@ -26,7 +26,12 @@ async function getBooksByGenre(id) {
 }
 // updateGenre(genre)
 // deleteGenre(id)
-// insertGenre(genre)
+async function insertGenre(genre) {
+  await pool.query(
+    "INSERT INTO genres (genre, image) VALUES ($1, 'template.jpg')",
+    [genre]
+  );
+}
 
 // AUTHORS QUERIES
 async function getAuthor(id) {
@@ -45,7 +50,9 @@ async function getBooksByAuthor(id) {
 }
 // updateAuthor(author)
 // deleteAuthor(id)
-// insertAuthor(author)
+async function insertAuthor(author) {
+  await pool.query('INSERT INTO authors (name) VALUES ($1)', [author]);
+}
 
 // BOOKS QUERIES
 async function getBookInformations(id) {
@@ -57,13 +64,23 @@ async function getBookInformations(id) {
 }
 // updateBook(book)
 // deleteBook(id)
-// insertBook(book)
+async function insertBook(book) {
+  await pool.query(
+    'INSERT INTO books (title, pages, plot, author_id) VALUES ($1, $2, $3, $4)',
+    [book.title, book.pages, book.plot, book.author_id]
+  );
+}
 // removeAuthorOffBooks(authorId)
 
 // BOOKS_GENRES DB QUERIES
 // deleteBookOffGenres(bookId)
 // deleteGenreOffBooks(genreId)
-// insertBookGenre(bookId, genreId)
+async function insertBookGenre(bookId, genreId) {
+  await pool.query(
+    'INSERT INTO books_genres (book_id, genre_id) VALUES ($1, $2)',
+    [bookId, genreId]
+  );
+}
 
 module.exports = {
   getAllGenres,
@@ -73,4 +90,8 @@ module.exports = {
   getAuthor,
   getBooksByAuthor,
   getBookInformations,
+  insertGenre,
+  insertAuthor,
+  insertBook,
+  insertBookGenre,
 };
