@@ -21,7 +21,10 @@ app.use((req, res, next) => {
 });
 
 app.use((err, req, res, next) => {
-  res.render('error', { error: err });
+  console.error(err);
+  err instanceof customError
+    ? res.render('error', { error: err })
+    : res.status(500).send('Unknown Error');
 });
 
 const PORT = process.env.PORT;
