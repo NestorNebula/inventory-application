@@ -24,7 +24,17 @@ function updateAuthorPost() {}
 
 function deleteAuthorPost() {}
 
-function createAuthorPost() {}
+async function createAuthorPost(req, res) {
+  const { newauthor } = req.body;
+  await db.insertAuthor(newauthor);
+  const same = await db.getAuthorByName(newauthor);
+  if (same.length > 0) {
+    alert('This author already exists.');
+  } else {
+    await db.insertAuthor(newauthor);
+  }
+  res.redirect('/');
+}
 
 module.exports = {
   getAuthor,

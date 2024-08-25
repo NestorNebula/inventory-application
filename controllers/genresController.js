@@ -24,7 +24,16 @@ function updateGenrePost() {}
 
 function deleteGenrePost() {}
 
-function createGenrePost() {}
+async function createGenrePost(req, res) {
+  const { newgenre } = req.body;
+  const same = await db.getGenreByName(newgenre);
+  if (same.length > 0) {
+    alert('This genre already exists.');
+  } else {
+    await db.insertGenre(newgenre);
+  }
+  res.redirect('/');
+}
 
 module.exports = {
   getGenre,
