@@ -17,6 +17,14 @@ async function getGenre(id) {
   return rows;
 }
 
+async function getGenreByName(genre) {
+  const { rows } = await pool.query(
+    "SELECT * FROM genres WHERE genre ILIKE '%' || $1 || '%'",
+    [genre]
+  );
+  return rows;
+}
+
 async function getBooksByGenre(id) {
   const { rows } = await pool.query(
     'SELECT * FROM books AS b INNER JOIN books_genres AS bg ON b.id = bg.book_id WHERE bg.genre_id = $1',
@@ -41,6 +49,14 @@ async function getAuthor(id) {
   return rows;
 }
 
+async function getAuthorByName(author) {
+  const { rows } = await pool.query(
+    "SELECT * FROM authors WHERE name ILIKE '%' || $1 || '%'",
+    [author]
+  );
+  return rows;
+}
+
 async function getBooksByAuthor(id) {
   const { rows } = await pool.query(
     'SELECT * FROM books AS b INNER JOIN authors AS a ON b.author_id = a.id WHERE b.author_id = $1',
@@ -62,6 +78,15 @@ async function getBookInformations(id) {
   );
   return rows;
 }
+
+async function getBookByTitle(book) {
+  const { rows } = await pool.query(
+    "SELECT * FROM books WHERE title ILIKE '%' || $1 || '%'",
+    [book]
+  );
+  return rows;
+}
+
 // updateBook(book)
 // deleteBook(id)
 async function insertBook(book) {
@@ -86,10 +111,13 @@ module.exports = {
   getAllGenres,
   getAllAuthors,
   getGenre,
+  getGenreByName,
   getBooksByGenre,
   getAuthor,
+  getAuthorByName,
   getBooksByAuthor,
   getBookInformations,
+  getBookByTitle,
   insertGenre,
   insertAuthor,
   insertBook,
