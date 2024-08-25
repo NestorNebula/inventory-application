@@ -33,6 +33,14 @@ VALUES
 INSERT INTO authors (name)
 VALUES
   ('Lewis Carroll'), ('Agatha Christie'), ('Paulo Coelho'), ('Ian Fleming'), ('Stephen King'), ('Masashi Kishimoto'), ('C. S. Lewis'), ('Stephenie Meyer'), ('James Patterson'), ('Beatrix Potter'), ('Anne Rice'), ('J. K. Rowling'), ('William Shakespeare'), ('Georges Simenon'), ('J. R. R. Tolkien'), ('Leo Tolstoy'), ('Akira Toriyama');
+
+INSERT INTO books (title, pages, plot, author_id)
+VALUES
+  ('A Tale of Two Cities', 428, NULL, NULL);
+
+INSERT INTO books_genres (book_id, genre_id)
+VALUES
+  (1, 8);
 `;
 
 async function main() {
