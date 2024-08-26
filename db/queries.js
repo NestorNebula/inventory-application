@@ -32,8 +32,16 @@ async function getBooksByGenre(id) {
   );
   return rows;
 }
-// updateGenre(genre)
+
+async function updateGenre(genre) {
+  await pool.query('UPDATE genres SET genre = $1 WHERE id = $2', [
+    genre.genre,
+    genre.id,
+  ]);
+}
+
 // deleteGenre(id)
+
 async function insertGenre(genre) {
   await pool.query(
     "INSERT INTO genres (genre, image) VALUES ($1, 'template.jpg')",
@@ -64,8 +72,16 @@ async function getBooksByAuthor(id) {
   );
   return rows;
 }
-// updateAuthor(author)
+
+async function updateAuthor(author) {
+  await pool.query('UPDATE authors SET name = $1 WHERE id = $2', [
+    author.name,
+    author.id,
+  ]);
+}
+
 // deleteAuthor(id)
+
 async function insertAuthor(author) {
   await pool.query('INSERT INTO authors (name) VALUES ($1)', [author]);
 }
@@ -113,9 +129,11 @@ module.exports = {
   getGenre,
   getGenreByName,
   getBooksByGenre,
+  updateGenre,
   getAuthor,
   getAuthorByName,
   getBooksByAuthor,
+  updateAuthor,
   getBookInformations,
   getBookByTitle,
   insertGenre,
