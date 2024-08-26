@@ -20,7 +20,14 @@ function getAuthor(req, res, next) {
     });
 }
 
-function updateAuthorPost() {}
+async function updateAuthorPost(req, res) {
+  const author = {
+    name: req.body.updated_author,
+    id: +req.params.author,
+  };
+  await db.updateAuthor(author);
+  res.redirect(`/author/${author.id}`);
+}
 
 function deleteAuthorPost() {}
 

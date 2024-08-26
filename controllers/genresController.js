@@ -20,7 +20,14 @@ function getGenre(req, res, next) {
     });
 }
 
-function updateGenrePost() {}
+async function updateGenrePost(req, res) {
+  const genre = {
+    genre: req.body.updated_genre,
+    id: +req.params.genre,
+  };
+  await db.updateGenre(genre);
+  res.redirect(`/genre/${genre.id}`);
+}
 
 function deleteGenrePost() {}
 
