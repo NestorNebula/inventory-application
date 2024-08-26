@@ -13,7 +13,27 @@ async function getBook(req, res, next) {
       )
     );
   }
-  res.render('book', { book: results[0], genres: results });
+  const genres = db.getAllGenres();
+  const authors = db.getAllAuthors();
+  Promise.all([genres, authors])
+    .then((values) => {
+      res.render('book', {
+        book: results[0],
+        book_genres: results,
+        genres: values[0],
+        authors: values[1],
+      });
+    })
+    .catch((error) => {
+      console.error(error);
+      next(
+        new customError(
+          "The server couldn't load the data you required",
+          500,
+          'Server error'
+        )
+      );
+    });
 }
 
 function updateBookPost() {}
