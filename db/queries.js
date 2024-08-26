@@ -133,7 +133,7 @@ async function deleteOldGenre(bookId, newGenres) {
 
 async function insertBookGenre(bookId, genreId) {
   await pool.query(
-    'INSERT INTO books_genres (book_id, genre_id) VALUES ($1, $2)',
+    'INSERT INTO books_genres (book_id, genre_id) VALUES ($1, $2) ON CONFLICT (book_id, genre_id) DO NOTHING',
     [bookId, genreId]
   );
 }

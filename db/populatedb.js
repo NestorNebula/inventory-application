@@ -23,7 +23,8 @@ CREATE TABLE IF NOT EXISTS books (
 
 CREATE TABLE IF NOT EXISTS books_genres (
   book_id INTEGER REFERENCES books(id),
-  genre_id INTEGER REFERENCES genres(id)
+  genre_id INTEGER REFERENCES genres(id),
+  CONSTRAINT unique_genre_book UNIQUE (book_id, genre_id)
 );
 
 INSERT INTO genres (genre, image)
