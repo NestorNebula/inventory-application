@@ -24,15 +24,21 @@ function updateAuthorPost() {}
 
 function deleteAuthorPost() {}
 
-async function createAuthorPost(req, res) {
+async function createAuthorPost(req, res, next) {
   const { newauthor } = req.body;
   await db.insertAuthor(newauthor);
   const same = await db.getAuthorByName(newauthor);
   if (same.length > 0) {
-    alert('This author already exists.');
-  } else {
-    await db.insertAuthor(newauthor);
+    next(
+      new customError(
+        'This author already exists.',
+        400,
+        'Author already exists'
+      )
+    );
+    return;
   }
+  await db.insertAuthor(newauthor);
   res.redirect('/');
 }
 

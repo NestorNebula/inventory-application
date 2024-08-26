@@ -24,14 +24,16 @@ function updateGenrePost() {}
 
 function deleteGenrePost() {}
 
-async function createGenrePost(req, res) {
+async function createGenrePost(req, res, next) {
   const { newgenre } = req.body;
   const same = await db.getGenreByName(newgenre);
   if (same.length > 0) {
-    alert('This genre already exists.');
-  } else {
-    await db.insertGenre(newgenre);
+    next(
+      new customError('This genre already exists.', 400, 'Genre already exists')
+    );
+    return;
   }
+  await db.insertGenre(newgenre);
   res.redirect('/');
 }
 
