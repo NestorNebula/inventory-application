@@ -9,13 +9,30 @@
     <header>
       <div><%= author.name %>'s Books</div>
     </header>
-    <% if (books.length) { %> <% books.forEach((book) => { %>
-    <div>
-      <div><%= book.title %></div>
-      <div><%= book.pages %></div>
-    </div>
-    <% }) %> <% } else { %>
-    <div>No Books for "<%= author.name %>".</div>
-    <% } %>
+    <section>
+      <% if (books.length) { %> <% books.forEach((book) => { %>
+      <div>
+        <div><%= book.title %></div>
+        <div><%= book.pages %></div>
+      </div>
+      <% }) %> <% } else { %>
+      <div>No Books for "<%= author.name %>".</div>
+      <% } %>
+    </section>
+    <section>
+      <button>+</button>
+      <div>Update Author</div>
+      <form action="/author/<%= author.id %>" method="POST">
+        <label for="updated_author">Author:</label>
+        <input
+          type="text"
+          name="updated_author"
+          id="updated_author"
+          value="<%= author.name %>"
+          required
+        />
+        <button type="submit">Submit Author</button>
+      </form>
+    </section>
   </body>
 </html>

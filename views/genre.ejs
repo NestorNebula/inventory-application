@@ -9,13 +9,30 @@
     <header>
       <div><%= genre.genre %> Books</div>
     </header>
-    <% if (books.length) { %> <% books.forEach((book) => { %>
-    <div>
-      <div><%= book.title %></div>
-      <div><%= book.pages %></div>
-    </div>
-    <% }) %> <% } else { %>
-    <div>No Books for the "<%= genre.genre %>" genre.</div>
-    <% } %>
+    <section>
+      <% if (books.length) { %> <% books.forEach((book) => { %>
+      <div>
+        <div><%= book.title %></div>
+        <div><%= book.pages %></div>
+      </div>
+      <% }) %> <% } else { %>
+      <div>No Books for the "<%= genre.genre %>" genre.</div>
+      <% } %>
+    </section>
+    <section>
+      <button>+</button>
+      <div>Update Genre</div>
+      <form action="/genre/<%= genre.id %>" method="POST">
+        <label for="updated_genre">Genre:</label>
+        <input
+          type="text"
+          id="updated_genre"
+          name="updated_genre"
+          value="<%= genre.genre %>"
+          required
+        />
+        <button type="submit">Submit Genre</button>
+      </form>
+    </section>
   </body>
 </html>
