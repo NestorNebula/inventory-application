@@ -25,7 +25,19 @@ function getAuthor(req, res, next) {
 
 const updateAuthorPost = [
   validateUpdatedAuthor,
-  async (req, res) => {
+  async (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      const message = getErrorMessage(errors);
+      next(
+        new customError(
+          `The form wasn't submitted correctly. ${message}`,
+          400,
+          'Incorrect Form'
+        )
+      );
+      return;
+    }
     const author = {
       name: req.body.updated_author,
       id: +req.params.author,
@@ -40,6 +52,18 @@ function deleteAuthorPost() {}
 const createAuthorPost = [
   validateNewAuthor,
   async (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      const message = getErrorMessage(errors);
+      next(
+        new customError(
+          `The form wasn't submitted correctly. ${message}`,
+          400,
+          'Incorrect Form'
+        )
+      );
+      return;
+    }
     const { newauthor } = req.body;
     await db.insertAuthor(newauthor);
     const same = await db.getAuthorByName(newauthor);
