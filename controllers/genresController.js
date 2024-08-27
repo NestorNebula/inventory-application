@@ -44,7 +44,22 @@ function getGenre(req, res, next) {
 
 const updateGenrePost = [
   validateUpdatedGenre,
-  async (req, res) => {
+  async (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      const errorList = errors.array();
+      const messages = [];
+      errorList.forEach((error) => messages.push(error.msg));
+      const message = messages.join(' ');
+      next(
+        new customError(
+          `The form wasn't submitted correctly. ${message}`,
+          400,
+          'Incorrect Form'
+        )
+      );
+      return;
+    }
     const genre = {
       genre: req.body.updated_genre,
       id: +req.params.genre,
@@ -59,6 +74,21 @@ function deleteGenrePost() {}
 const createGenrePost = [
   validateNewGenre,
   async (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      const errorList = errors.array();
+      const messages = [];
+      errorList.forEach((error) => messages.push(error.msg));
+      const message = messages.join(' ');
+      next(
+        new customError(
+          `The form wasn't submitted correctly. ${message}`,
+          400,
+          'Incorrect Form'
+        )
+      );
+      return;
+    }
     const { newgenre } = req.body;
     const same = await db.getGenreByName(newgenre);
     if (same.length > 0) {
