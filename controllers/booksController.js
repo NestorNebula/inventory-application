@@ -18,6 +18,7 @@ async function getBook(req, res, next) {
   Promise.all([genres, authors])
     .then((values) => {
       res.render('book', {
+        id: req.params.book,
         book: results[0],
         book_genres: results,
         genres: values[0],
