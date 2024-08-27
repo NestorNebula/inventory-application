@@ -106,7 +106,7 @@ async function getBookByTitle(book) {
 async function updateBook(book) {
   await pool.query(
     'UPDATE books SET title = $1, pages = $2, plot = $3, author_id = $4 WHERE id = $5',
-    [book.title, book.pages, book.plot, book.author_id]
+    [book.title, book.pages, book.plot, book.author_id, book.id]
   );
 }
 
