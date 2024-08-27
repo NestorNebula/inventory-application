@@ -41,7 +41,19 @@ async function getBook(req, res, next) {
 
 const updateBookPost = [
   validateBook,
-  async (req, res) => {
+  async (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      const message = getErrorMessage(errors);
+      next(
+        new customError(
+          `The form wasn't submitted correctly. ${message}`,
+          400,
+          'Incorrect Form'
+        )
+      );
+      return;
+    }
     const book = {
       id: +req.params.book,
       title: req.body.title,
@@ -66,6 +78,18 @@ function deleteBookPost() {}
 const createBookPost = [
   validateBook,
   async (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      const message = getErrorMessage(errors);
+      next(
+        new customError(
+          `The form wasn't submitted correctly. ${message}`,
+          400,
+          'Incorrect Form'
+        )
+      );
+      return;
+    }
     const book = {
       title: req.body.title,
       pages: +req.body.pages,
