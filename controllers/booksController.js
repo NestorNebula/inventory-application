@@ -73,7 +73,10 @@ const updateBookPost = [
   },
 ];
 
-function deleteBookPost() {}
+async function deleteBookPost(req, res) {
+  await db.deleteBookFromGenres(+req.params.book);
+  await db.deleteBook(+req.params.book);
+}
 
 const createBookPost = [
   validateBook,

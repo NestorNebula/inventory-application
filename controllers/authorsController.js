@@ -47,7 +47,11 @@ const updateAuthorPost = [
   },
 ];
 
-function deleteAuthorPost() {}
+async function deleteAuthorPost(req, res) {
+  await db.removeAuthorFromBooks(+req.params.author);
+  await db.deleteAuthor(+req.params.author);
+  res.redirect('/');
+}
 
 const createAuthorPost = [
   validateNewAuthor,

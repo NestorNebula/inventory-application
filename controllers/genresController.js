@@ -47,7 +47,11 @@ const updateGenrePost = [
   },
 ];
 
-function deleteGenrePost() {}
+async function deleteGenrePost(req, res) {
+  await db.deleteGenreFromBooks(+req.params.genre);
+  await db.deleteGenre(+req.params.genre);
+  res.redirect('/');
+}
 
 const createGenrePost = [
   validateNewGenre,
