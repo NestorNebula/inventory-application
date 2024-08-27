@@ -1,4 +1,5 @@
 const { body } = require('express-validator');
+require('dotenv').config();
 
 const errorsMessage = {
   genreAlphaErr: 'The genre must only contain letters.',
@@ -9,6 +10,7 @@ const errorsMessage = {
   titleLengthErr: 'The book title length must be between 5 and 50 characters.',
   plotLengthErr: 'The plot length must be between 1000 characters maximum.',
   pagesNumErr: 'Pages must be a number.',
+  passwordErr: 'Password is incorrect.',
 };
 
 const validations = {
@@ -27,6 +29,9 @@ const validations = {
       .withMessage(errorsMessage.genreAlphaErr)
       .isLength({ min: 5, max: 20 })
       .withMessage(errorsMessage.genreLengthErr),
+    body('password')
+      .equals(process.env.PWD)
+      .withMessage(errorsMessage.passwordErr),
   ],
   validateNewAuthor: [
     body('newauthor')
@@ -43,6 +48,9 @@ const validations = {
       .withMessage(errorsMessage.authorAlphaErr)
       .isLength({ min: 5, max: 25 })
       .withMessage(errorsMessage.authorLengthErr),
+    body('password')
+      .equals(process.env.PWD)
+      .withMessage(errorsMessage.passwordErr),
   ],
   validateBook: [
     body('title')
@@ -57,6 +65,23 @@ const validations = {
       .isLength({ max: 1000 })
       .withMessage(errorsMessage.plotLengthErr),
     body('book_genres').not().isEmpty(),
+  ],
+  validateUpdatedBook: [
+    body('title')
+      .trim()
+      .isLength({ min: 5, max: 50 })
+      .withMessage(errorsMessage.titleLengthErr)
+      .blacklist('<>'),
+    body('pages').trim().isNumeric().withMessage(errorsMessage.pagesNumErr),
+    body('plot')
+      .trim()
+      .blacklist('<>')
+      .isLength({ max: 1000 })
+      .withMessage(errorsMessage.plotLengthErr),
+    body('book_genres').not().isEmpty(),
+    body('password')
+      .equals(process.env.PWD)
+      .withMessage(errorsMessage.passwordErr),
   ],
 };
 
