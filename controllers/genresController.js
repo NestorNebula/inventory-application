@@ -1,27 +1,8 @@
 const db = require('../db/queries');
 const customError = require('../modules/error');
-const { body, validationResult } = require('express-validator');
-
-const alphaErr = 'The genre must only contain letters.';
-const lengthErr = "The genre's length must be between 5 and 20 characters.";
-
-const validateNewGenre = [
-  body('newgenre')
-    .trim()
-    .isAlpha()
-    .withMessage(alphaErr)
-    .isLength({ min: 5, max: 20 })
-    .withMessage(lengthErr),
-];
-
-const validateUpdatedGenre = [
-  body('updated_genre')
-    .trim()
-    .isAlpha()
-    .withMessage(alphaErr)
-    .isLength({ min: 5, max: 20 })
-    .withMessage(lengthErr),
-];
+const { validationResult } = require('express-validator');
+const { validations, getErrorMessage } = require('../modules/validation');
+const { validateNewGenre, validateUpdatedGenre } = validations;
 
 function getGenre(req, res, next) {
   const genre = db.getGenre(req.params.genre);
@@ -47,10 +28,7 @@ const updateGenrePost = [
   async (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      const errorList = errors.array();
-      const messages = [];
-      errorList.forEach((error) => messages.push(error.msg));
-      const message = messages.join(' ');
+      const message = getErrorMessage(errors);
       next(
         new customError(
           `The form wasn't submitted correctly. ${message}`,
@@ -76,10 +54,7 @@ const createGenrePost = [
   async (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      const errorList = errors.array();
-      const messages = [];
-      errorList.forEach((error) => messages.push(error.msg));
-      const message = messages.join(' ');
+      const message = getErrorMessage(errors);
       next(
         new customError(
           `The form wasn't submitted correctly. ${message}`,
