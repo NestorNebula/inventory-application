@@ -1,5 +1,4 @@
 const db = require('../db/queries');
-const CustomError = require('../modules/error');
 const customError = require('../modules/error');
 
 async function getBook(req, res, next) {
@@ -79,7 +78,7 @@ async function createBookPost(req, res, next) {
   const [bookId] = await db.getBookByTitle(book.title);
   if (!bookId) {
     next(
-      new CustomError(
+      new customError(
         'There was an error when the book was included in the database.',
         500,
         'Server Error'
