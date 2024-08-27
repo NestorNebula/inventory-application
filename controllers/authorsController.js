@@ -42,34 +42,40 @@ function getAuthor(req, res, next) {
     });
 }
 
-async function updateAuthorPost(req, res) {
-  const author = {
-    name: req.body.updated_author,
-    id: +req.params.author,
-  };
-  await db.updateAuthor(author);
-  res.redirect(`/author/${author.id}`);
-}
+const updateAuthorPost = [
+  validateUpdatedAuthor,
+  async (req, res) => {
+    const author = {
+      name: req.body.updated_author,
+      id: +req.params.author,
+    };
+    await db.updateAuthor(author);
+    res.redirect(`/author/${author.id}`);
+  },
+];
 
 function deleteAuthorPost() {}
 
-async function createAuthorPost(req, res, next) {
-  const { newauthor } = req.body;
-  await db.insertAuthor(newauthor);
-  const same = await db.getAuthorByName(newauthor);
-  if (same.length > 0) {
-    next(
-      new customError(
-        'This author already exists.',
-        400,
-        'Author already exists'
-      )
-    );
-    return;
-  }
-  await db.insertAuthor(newauthor);
-  res.redirect('/');
-}
+const createAuthorPost = [
+  validateNewAuthor,
+  async (req, res, next) => {
+    const { newauthor } = req.body;
+    await db.insertAuthor(newauthor);
+    const same = await db.getAuthorByName(newauthor);
+    if (same.length > 0) {
+      next(
+        new customError(
+          'This author already exists.',
+          400,
+          'Author already exists'
+        )
+      );
+      return;
+    }
+    await db.insertAuthor(newauthor);
+    res.redirect('/');
+  },
+];
 
 module.exports = {
   getAuthor,

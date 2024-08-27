@@ -42,29 +42,39 @@ function getGenre(req, res, next) {
     });
 }
 
-async function updateGenrePost(req, res) {
-  const genre = {
-    genre: req.body.updated_genre,
-    id: +req.params.genre,
-  };
-  await db.updateGenre(genre);
-  res.redirect(`/genre/${genre.id}`);
-}
+const updateGenrePost = [
+  validateUpdatedGenre,
+  async (req, res) => {
+    const genre = {
+      genre: req.body.updated_genre,
+      id: +req.params.genre,
+    };
+    await db.updateGenre(genre);
+    res.redirect(`/genre/${genre.id}`);
+  },
+];
 
 function deleteGenrePost() {}
 
-async function createGenrePost(req, res, next) {
-  const { newgenre } = req.body;
-  const same = await db.getGenreByName(newgenre);
-  if (same.length > 0) {
-    next(
-      new customError('This genre already exists.', 400, 'Genre already exists')
-    );
-    return;
-  }
-  await db.insertGenre(newgenre);
-  res.redirect('/');
-}
+const createGenrePost = [
+  validateNewGenre,
+  async (req, res, next) => {
+    const { newgenre } = req.body;
+    const same = await db.getGenreByName(newgenre);
+    if (same.length > 0) {
+      next(
+        new customError(
+          'This genre already exists.',
+          400,
+          'Genre already exists'
+        )
+      );
+      return;
+    }
+    await db.insertGenre(newgenre);
+    res.redirect('/');
+  },
+];
 
 module.exports = {
   getGenre,
