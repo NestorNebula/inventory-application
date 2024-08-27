@@ -2,7 +2,7 @@ const db = require('../db/queries');
 const customError = require('../modules/error');
 const { validationResult } = require('express-validator');
 const { validations, getErrorMessage } = require('../modules/validation');
-const { validateBook } = validations;
+const { validateBook, validateUpdatedBook } = validations;
 
 async function getBook(req, res, next) {
   const results = await db.getBookInformations(req.params.book);
@@ -40,7 +40,7 @@ async function getBook(req, res, next) {
 }
 
 const updateBookPost = [
-  validateBook,
+  validateUpdatedBook,
   async (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
