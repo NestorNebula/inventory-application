@@ -3,6 +3,7 @@ const customError = require('../modules/error');
 const { validationResult } = require('express-validator');
 const { validations, getErrorMessage } = require('../modules/validation');
 const { validateNewGenre, validateUpdatedGenre } = validations;
+require('dotenv').config();
 
 function getGenre(req, res, next) {
   const genre = db.getGenre(req.params.genre);
@@ -47,7 +48,17 @@ const updateGenrePost = [
   },
 ];
 
-async function deleteGenrePost(req, res) {
+async function deleteGenrePost(req, res, next) {
+  if (req.body.password !== process.env.PWD) {
+    next(
+      new customError(
+        "Can't delete the genre, the password is incorrect.",
+        400,
+        'Incorrect Password'
+      )
+    );
+    return;
+  }
   await db.deleteGenreFromBooks(+req.params.genre);
   await db.deleteGenre(+req.params.genre);
   res.redirect('/');

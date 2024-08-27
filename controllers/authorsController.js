@@ -3,6 +3,7 @@ const customError = require('../modules/error');
 const { validationResult } = require('express-validator');
 const { validations, getErrorMessage } = require('../modules/validation');
 const { validateNewAuthor, validateUpdatedAuthor } = validations;
+require('dotenv').config();
 
 function getAuthor(req, res, next) {
   const author = db.getAuthor(req.params.author);
@@ -47,7 +48,17 @@ const updateAuthorPost = [
   },
 ];
 
-async function deleteAuthorPost(req, res) {
+async function deleteAuthorPost(req, res, next) {
+  if (req.body.password !== process.env.PWD) {
+    next(
+      new customError(
+        "Can't delete the author, the password is incorrect.",
+        400,
+        'Incorrect Password'
+      )
+    );
+    return;
+  }
   await db.removeAuthorFromBooks(+req.params.author);
   await db.deleteAuthor(+req.params.author);
   res.redirect('/');
