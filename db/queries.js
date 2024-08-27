@@ -40,7 +40,9 @@ async function updateGenre(genre) {
   ]);
 }
 
-// deleteGenre(id)
+async function deleteGenre(id) {
+  await pool.query('DELETE FROM genres WHERE id = $1', [id]);
+}
 
 async function insertGenre(genre) {
   await pool.query(
@@ -80,7 +82,9 @@ async function updateAuthor(author) {
   ]);
 }
 
-// deleteAuthor(id)
+async function deleteAuthor(id) {
+  await pool.query('DELETE FROM authors WHERE id = $1', [id]);
+}
 
 async function insertAuthor(author) {
   await pool.query('INSERT INTO authors (name) VALUES ($1)', [author]);
@@ -110,7 +114,9 @@ async function updateBook(book) {
   );
 }
 
-// deleteBook(id)
+async function deleteBook(id) {
+  await pool.query('DELETE FROM books WHERE id = $1', [id]);
+}
 
 async function insertBook(book) {
   await pool.query(
@@ -118,9 +124,13 @@ async function insertBook(book) {
     [book.title, book.pages, book.plot, book.author_id]
   );
 }
-// removeAuthorOffBooks(authorId)
+async function removeAuthorFromBooks(authorId) {
+  await pool.query('UPDATE books SET author_id = NULL WHERE author_id = $1', [
+    authorId,
+  ]);
+}
 
-// BOOKS_GENRES DB QUERIES
+// BOOKS_GENRES TABLE QUERIES
 async function deleteOldGenre(bookId, newGenres) {
   await pool.query(
     'DELETE FROM books_genres WHERE book_id = $1 AND genre_id != ALL ($2)',
@@ -128,8 +138,13 @@ async function deleteOldGenre(bookId, newGenres) {
   );
 }
 
-// deleteBookOffGenres(bookId)
-// deleteGenreOffBooks(genreId)
+async function deleteBookFromGenres(bookId) {
+  await pool.query('DELETE FROM books_genres WHERE book_id = $1', [bookId]);
+}
+
+async function deleteGenreFromBooks(genreId) {
+  await pool.query('DELETE FROM books_genres WHERE genre_id = $1', [genreId]);
+}
 
 async function insertBookGenre(bookId, genreId) {
   await pool.query(
@@ -145,16 +160,22 @@ module.exports = {
   getGenreByName,
   getBooksByGenre,
   updateGenre,
+  deleteGenre,
   insertGenre,
   getAuthor,
   getAuthorByName,
   getBooksByAuthor,
   updateAuthor,
+  deleteAuthor,
+  insertAuthor,
   getBookInformations,
   getBookByTitle,
   updateBook,
-  insertAuthor,
+  deleteBook,
   insertBook,
+  removeAuthorFromBooks,
   deleteOldGenre,
+  deleteBookFromGenres,
+  deleteGenreFromBooks,
   insertBookGenre,
 };
