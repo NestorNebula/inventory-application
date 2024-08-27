@@ -36,7 +36,24 @@ async function getBook(req, res, next) {
     });
 }
 
-function updateBookPost() {}
+async function updateBookPost(req, res) {
+  const book = {
+    id: +req.params.book,
+    title: req.body.title,
+    pages: +req.body.pages,
+    plot: req.body.plot,
+    author_id: req.body.author_id === 'none' ? null : +req.body.author_id,
+    genres: Array.isArray(req.body.book_genres)
+      ? req.body.book_genres
+      : [req.body.book_genres],
+  };
+  await db.updateBook(book);
+  await db.deleteOldGenre(book.id, book.genres);
+  for (let i = 0; i < book.genres.length; i++) {
+    await db.insertBookGenre(book.id, +book.genres[i]);
+  }
+  res.redirect('/');
+}
 
 function deleteBookPost() {}
 
