@@ -31,12 +31,16 @@
           value="<%= author.name %>"
           required
         />
+        <label for="update_password">Password:</label>
+        <input type="password" name="password" id="update_password" />
         <button type="submit">Submit Author</button>
       </form>
     </section>
     <section>
       <form action="/author/<%= author.id %>/delete" method="POST">
         <button type="submit">-</button>
+        <label for="delete_password">Password:</label>
+        <input type="password" name="password" id="delete_password" />
         <div>Delete Author</div>
       </form>
     </section>

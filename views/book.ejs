@@ -74,12 +74,16 @@
           <label for="genre <%= genre.id %>"><%= genre.genre %></label>
           <% }) %>
         </fieldset>
+        <label for="update_password">Password:</label>
+        <input type="password" name="password" id="update_password" />
         <button type="submit">Submit Book</button>
       </form>
     </section>
     <section>
       <form action="/book/<%= id %>/delete" method="POST">
         <button type="submit">-</button>
+        <label for="delete_password">Password:</label>
+        <input type="password" name="password" id="delete_password" />
         <div>Delete Book</div>
       </form>
     </section>
