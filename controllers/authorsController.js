@@ -1,5 +1,27 @@
 const db = require('../db/queries');
 const customError = require('../modules/error');
+const { body, validationResult } = require('express-validator');
+
+const alphaErr = 'The author must only contain letters.';
+const lengthErr = 'The author name length must be between 5 and 25 characters.';
+
+const validateNewAuthor = [
+  body('newauthor')
+    .trim()
+    .isAlpha()
+    .withMessage(alphaErr)
+    .isLength({ min: 5, max: 25 })
+    .withMessage(lengthErr),
+];
+
+const validateUpdatedAuthor = [
+  body('updated_author')
+    .trim()
+    .isAlpha()
+    .withMessage(alphaErr)
+    .isLength({ min: 5, max: 25 })
+    .withMessage(lengthErr),
+];
 
 function getAuthor(req, res, next) {
   const author = db.getAuthor(req.params.author);

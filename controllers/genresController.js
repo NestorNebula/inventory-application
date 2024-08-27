@@ -1,5 +1,27 @@
 const db = require('../db/queries');
 const customError = require('../modules/error');
+const { body, validationResult } = require('express-validator');
+
+const alphaErr = 'The genre must only contain letters.';
+const lengthErr = "The genre's length must be between 5 and 20 characters.";
+
+const validateNewGenre = [
+  body('newgenre')
+    .trim()
+    .isAlpha()
+    .withMessage(alphaErr)
+    .isLength({ min: 5, max: 20 })
+    .withMessage(lengthErr),
+];
+
+const validateUpdatedGenre = [
+  body('updated_genre')
+    .trim()
+    .isAlpha()
+    .withMessage(alphaErr)
+    .isLength({ min: 5, max: 20 })
+    .withMessage(lengthErr),
+];
 
 function getGenre(req, res, next) {
   const genre = db.getGenre(req.params.genre);

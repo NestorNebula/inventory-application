@@ -1,5 +1,27 @@
 const db = require('../db/queries');
 const customError = require('../modules/error');
+const { body, validationResult } = require('express-validator');
+
+const titleLengthErr =
+  'The book title length must be between 5 and 50 characters.';
+const plotLengthErr =
+  'The plot length must be between 1000 characters maximum.';
+const numErr = 'Pages must be a number.';
+
+const validateBook = [
+  body('title')
+    .trim()
+    .isLength({ min: 5, max: 50 })
+    .withMessage(titleLengthErr)
+    .blacklist('<>'),
+  body('pages').trim().isNumeric().withMessage(numErr),
+  body('plot')
+    .trim()
+    .blacklist('<>')
+    .isLength({ max: 1000 })
+    .withMessage(plotLengthErr),
+  body('book_genres').not().isEmpty(),
+];
 
 async function getBook(req, res, next) {
   const results = await db.getBookInformations(req.params.book);
