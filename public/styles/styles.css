@@ -57,9 +57,10 @@ body {
 }
 
 header {
-  align-self: center;
+  text-align: center;
   font-size: 3.5rem;
-  padding-top: 3rem;
+  padding: var(--section-title-padding);
+  background-color: #93c5fd;
 }
 
 main {
@@ -81,6 +82,7 @@ textarea {
   visibility: hidden;
   max-height: 0;
   opacity: 0;
+  display: block !important;
 }
 
 /* Index.ejs */
@@ -88,6 +90,7 @@ textarea {
 .genres-title {
   font-size: 2.5rem;
   padding: var(--section-title-padding);
+  padding-top: 0;
 }
 
 .home-genres {
