@@ -4,32 +4,50 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%= title %></title>
+    <link rel="stylesheet" href="./styles/styles.css" />
+    <script src="/scripts/forms.js" defer></script>
   </head>
   <body>
     <header>
-      <div><%= title %></div>
+      <div class="home-title"><%= title %></div>
     </header>
     <main>
-      <section>
+      <div class="genres-title">Genres</div>
+      <section class="home-genres">
         <% genres.forEach((genre) => { %>
-        <a href="/genre/<%= genre.id %>">
-          <div><%= genre.genre %></div>
-          <img src="/assets/images/<%= genre.image %>" alt="" />
+        <a class="home-genre-link" href="/genre/<%= genre.id %>">
+          <div class="home-genre">
+            <img
+              class="genre-image"
+              src="/assets/images/<%= genre.image %>"
+              alt=""
+            />
+            <div><%= genre.genre %></div>
+          </div>
         </a>
         <% }) %>
       </section>
-      <section>
-        <% authors.forEach((author) => { %>
-        <a href="/author/<%= author.id %>">
-          <div><%= author.name %></div>
-        </a>
+      <div class="authors-title">Authors</div>
+      <section class="home-authors">
+        <% letters.forEach((letter) => { %>
+          <div class="authors-by-letter">
+          <div class="letter"><%= letter %></div>
+          <% authors.forEach((author) => { %>
+            <% if (author.name[0].toLowerCase() === letter) { %>
+              <a href="/author/<%= author.id %>">
+                <div class="author-name"><%= author.name %></div>
+              </a>
+            <% } %>
+          <% }) %>
+          </div>
         <% }) %>
       </section>
-      <section>
-        <div>
-          <button>+</button>
+      <div class="forms-intro">Add new Books, Authors and Genres using the Forms below.</div>
+      <section class="add-forms">
+        <div class="newbook">
+          <button class="plus-button" aria-label="open new book form"><img class="plusimg" src="/assets/icons/plus.png" alt=""></button>
           <div>Add a Book</div>
-          <form action="/book" method="POST">
+          <form class="newbook-form home-form hidden" action="/book" method="POST">
             <label for="title">Title:</label>
             <input type="text" name="title" id="title" required />
             <label for="pages">Pages:</label>
@@ -45,7 +63,9 @@
             </select>
             <fieldset>
               <legend>Add at least one genre for the Book</legend>
+              <div class="fieldset-genres">
               <% genres.forEach((genre) => { %>
+              <div>
               <input
                 type="checkbox"
                 value="<%= genre.id %>"
@@ -53,24 +73,26 @@
                 id="genre <%= genre.id %>"
               />
               <label for="genre <%= genre.id %>"><%= genre.genre %></label>
+              </div>
               <% }) %>
+            </div>
             </fieldset>
             <button type="submit">Submit Book</button>
           </form>
         </div>
-        <div>
-          <button>+</button>
+        <div class="newgenre">
+          <button class="plus-button" aria-label="open new genre form"><img class="plusimg" src="/assets/icons/plus.png" alt=""></button>
           <div>Add a Genre</div>
-          <form action="/genre" method="POST">
+          <form class="newgenre-form home-form hidden" action="/genre" method="POST">
             <label for="newgenre">Genre:</label>
             <input type="text" id="newgenre" name="newgenre" required />
             <button type="submit">Submit Genre</button>
           </form>
         </div>
-        <div>
-          <button>+</button>
+        <div class="newauthor">
+          <button class="plus-button" aria-label="open new author form"><img class="plusimg" src="/assets/icons/plus.png" alt=""></button>
           <div>Add an Author</div>
-          <form action="/author" method="POST">
+          <form class="newauthor-form home-form hidden" action="/author" method="POST">
             <label for="newauthor">Author:</label>
             <input type="text" name="newauthor" id="newauthor" required />
             <button type="submit">Submit Author</button>
