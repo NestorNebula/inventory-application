@@ -82,3 +82,122 @@ textarea {
   max-height: 0;
   opacity: 0;
 }
+
+/* Index.ejs */
+
+.genres-title {
+  font-size: 2.5rem;
+  padding: var(--section-title-padding);
+}
+
+.home-genres {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem 3rem;
+  padding: 0 2rem;
+}
+
+.home-genre {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  height: 100%;
+}
+
+.home-genre > div {
+  font-size: 2rem;
+  align-self: center;
+  margin-top: auto;
+}
+
+.genre-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.authors-title {
+  font-size: 2.5rem;
+  padding: var(--section-title-padding);
+}
+
+.authors-by-letter {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.home-authors {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 2rem;
+  padding: 0 2rem;
+}
+
+.letter {
+  font-size: 2.5rem;
+  text-transform: uppercase;
+}
+
+.author-name {
+  font-size: 1.5rem;
+}
+
+.forms-intro {
+  padding: var(--section-title-padding);
+  font-size: 2.5rem;
+}
+
+.add-forms {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.add-forms > * {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1rem 3rem;
+  padding: 1rem;
+}
+
+.add-forms > * > form {
+  grid-column: 1 / 3;
+}
+
+.add-forms > * > div {
+  font-size: 2rem;
+  align-self: center;
+}
+
+.plusimg {
+  width: 3rem;
+}
+
+.newbook-form,
+.newauthor-form,
+.newgenre-form {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1rem;
+  font-size: 2rem;
+}
+
+#book_id,
+#author_id,
+#genre_id {
+  font-size: 1.25rem;
+}
+
+.newbook-form > button,
+.newauthor-form > button,
+.newgenre-form > button,
+fieldset {
+  grid-column: 1 / 3;
+}
+
+.fieldset-genres {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+}
