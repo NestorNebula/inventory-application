@@ -2,12 +2,12 @@ const pool = require('./pool');
 
 // GENERAL QUERIES
 async function getAllGenres() {
-  const { rows } = await pool.query('SELECT * FROM genres');
+  const { rows } = await pool.query('SELECT * FROM genres ORDER BY genre');
   return rows;
 }
 
 async function getAllAuthors() {
-  const { rows } = await pool.query('SELECT * FROM authors');
+  const { rows } = await pool.query('SELECT * FROM authors ORDER BY name');
   return rows;
 }
 
