@@ -60,7 +60,10 @@ header {
   text-align: center;
   font-size: 3.5rem;
   padding: var(--section-title-padding);
-  background-color: #93c5fd;
+  background-color: #eff6ff;
+  position: sticky;
+  z-index: 1;
+  top: 0;
 }
 
 main {
@@ -93,6 +96,12 @@ a:focus {
   border-radius: 2px;
 }
 
+ul {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
 .hidden {
   visibility: hidden;
   max-height: 0;
@@ -117,9 +126,7 @@ a:focus {
   width: 100vw;
 }
 
-.genres-title {
-  font-size: 2.5rem;
-  padding: var(--section-title-padding);
+.content-overview {
   padding-top: 0;
 }
 
@@ -127,7 +134,11 @@ a:focus {
   padding: 2rem;
   background-color: rgb(243, 244, 246, 0.5);
   border-radius: 5px;
-  box-shadow: 1px 1px 3px lightblue;
+  box-shadow: 1px 1px 3px rgba(173, 216, 230, 0.5);
+}
+
+.home-content {
+  font-size: 2rem;
 }
 
 .home-genres {
@@ -154,8 +165,15 @@ a:focus {
   height: 100%;
   object-fit: cover;
   border-radius: 10px;
+  box-shadow: 0px 0px 5px lightblue;
 }
 
+.genre-image:hover {
+  animation: genreImage 1.5s;
+}
+
+.content-overview,
+.genres-title,
 .authors-title {
   font-size: 2.5rem;
   padding: var(--section-title-padding);
@@ -267,6 +285,24 @@ fieldset {
 
 .formbtn:hover::before {
   opacity: 1;
+}
+
+@keyframes genreImage {
+  from {
+    transform: scale(0.95);
+  }
+  40% {
+    transform: scale(1.05);
+  }
+  65% {
+    transform: scale(1.02);
+  }
+  80% {
+    transform: scale(1.04);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 @keyframes buttonAnimation {

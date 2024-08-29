@@ -13,7 +13,15 @@
       <div class="home-title"><%= title %></div>
     </header>
     <main>
-      <div class="genres-title">Genres</div>
+      <div class="content-overview">Homepage Content</div>
+      <section class="home-content home-section">
+        <ul>
+        <li><a href="#genres-link">Genres</a></li>
+        <li><a href="#authors-link">Authors</a></li>
+        <li><a href="#forms-link">Add new books, genres and authors</a></li>
+      </ul>
+      </section>
+      <div id="genres-link" class="genres-title">Genres</div>
       <section class="home-genres home-section">
         <% genres.forEach((genre) => { %>
         <a class="home-genre-link" href="/genre/<%= genre.id %>">
@@ -28,7 +36,7 @@
         </a>
         <% }) %>
       </section>
-      <div class="authors-title">Authors</div>
+      <div id="authors-link" class="authors-title">Authors</div>
       <section class="home-authors home-section">
         <% letters.forEach((letter) => { %>
           <div class="authors-by-letter">
@@ -43,7 +51,7 @@
           </div>
         <% }) %>
       </section>
-      <div class="forms-intro">Add new Books, Authors and Genres using the Forms below.</div>
+      <div id="forms-link" class="forms-intro">Add new Books, Authors and Genres using the Forms below.</div>
       <section class="add-forms home-section">
         <div class="newbook">
           <button class="plus-button" aria-label="open new book form"><img class="plusimg" src="/assets/icons/plus.png" alt=""></button>
