@@ -78,6 +78,21 @@ textarea {
   padding: 0.25rem;
 }
 
+a {
+  color: #0c4a6e;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a:focus {
+  color: #14b8a6;
+  outline: 2px solid #0369a1;
+  border-radius: 2px;
+}
+
 .hidden {
   visibility: hidden;
   max-height: 0;
