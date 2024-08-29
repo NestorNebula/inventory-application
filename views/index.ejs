@@ -78,7 +78,7 @@
               <% }) %>
             </div>
             </fieldset>
-            <button type="submit">Submit Book</button>
+            <button class="formbtn" type="submit">Submit Book</button>
           </form>
         </div>
         <div class="newgenre">
@@ -87,16 +87,16 @@
           <form class="newgenre-form home-form hidden" action="/genre" method="POST">
             <label for="newgenre">Genre:</label>
             <input type="text" id="newgenre" name="newgenre" required />
-            <button type="submit">Submit Genre</button>
+            <button class="formbtn" type="submit">Submit Genre</button>
           </form>
         </div>
         <div class="newauthor">
           <button class="plus-button" aria-label="open new author form"><img class="plusimg" src="/assets/icons/plus.png" alt=""></button>
           <div>Add an Author</div>
-          <form class="newauthor-form home-form hidden" action="/author" method="POST">
+          <form class="newauthor-form home-form" action="/author" method="POST">
             <label for="newauthor">Author:</label>
             <input type="text" name="newauthor" id="newauthor" required />
-            <button type="submit">Submit Author</button>
+            <div class="formbtn"><button type="submit">Submit Author</button></div>
           </form>
         </div>
       </section>
