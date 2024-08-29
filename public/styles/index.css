@@ -99,10 +99,6 @@
   align-self: center;
 }
 
-.plusimg {
-  width: 3rem;
-}
-
 .newbook-form,
 .newauthor-form,
 .newgenre-form {
@@ -145,14 +141,5 @@ fieldset {
   }
   100% {
     transform: scale(1);
-  }
-}
-
-@keyframes buttonAnimation {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
   }
 }

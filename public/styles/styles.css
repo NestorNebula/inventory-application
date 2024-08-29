@@ -154,3 +154,35 @@ ul {
 .formbtn:hover::before {
   opacity: 1;
 }
+
+.form-grid {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1rem 3rem;
+  padding: 1rem;
+  font-size: 2rem;
+}
+
+.form-grid > form {
+  grid-column: 1 / 3;
+}
+
+.form {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1rem;
+}
+
+.plusimg,
+.minusimg {
+  width: 3rem;
+}
+
+@keyframes buttonAnimation {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
