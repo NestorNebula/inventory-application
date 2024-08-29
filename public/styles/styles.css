@@ -87,6 +87,21 @@ textarea {
 
 /* Index.ejs */
 
+.background-font {
+  background-color: aliceblue;
+  background-image: repeating-radial-gradient(
+    circle at 0 0,
+    aliceblue 0,
+    transparent 30px,
+    #bae6fd 100px
+  );
+  opacity: 0.25;
+  position: fixed;
+  z-index: -1;
+  height: 100vh;
+  width: 100vw;
+}
+
 .genres-title {
   font-size: 2.5rem;
   padding: var(--section-title-padding);
