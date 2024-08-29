@@ -95,7 +95,7 @@ textarea {
     transparent 30px,
     #bae6fd 100px
   );
-  opacity: 0.25;
+  opacity: 0.15;
   position: fixed;
   z-index: -1;
   height: 100vh;
@@ -108,11 +108,17 @@ textarea {
   padding-top: 0;
 }
 
+.home-section {
+  padding: 2rem;
+  background-color: rgb(243, 244, 246, 0.5);
+  border-radius: 5px;
+  box-shadow: 1px 1px 3px lightblue;
+}
+
 .home-genres {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 1.5rem 3rem;
-  padding: 0 2rem;
 }
 
 .home-genre {
@@ -150,7 +156,6 @@ textarea {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   gap: 2rem;
-  padding: 0 2rem;
 }
 
 .letter {
