@@ -108,3 +108,49 @@ ul {
   opacity: 0;
   display: block !important;
 }
+
+/* Common Styles */
+
+.background-font {
+  background-color: aliceblue;
+  background-image: repeating-radial-gradient(
+    circle at 0 0,
+    aliceblue 0,
+    transparent 30px,
+    #bae6fd 100px
+  );
+  opacity: 0.15;
+  position: fixed;
+  z-index: -1;
+  height: 100vh;
+  width: 100vw;
+}
+
+.formbtn {
+  position: relative;
+  background: linear-gradient(to right, #fafafa 30%, #fef2f2);
+  justify-self: center;
+  padding: 1rem;
+  border-radius: 3px;
+  border: 1px solid #f8fafc;
+  grid-column: 1 / 3;
+  z-index: 1;
+}
+
+.formbtn::before {
+  position: absolute;
+  content: '';
+  opacity: 0;
+  background: linear-gradient(to right, #bae6fd, #f5f5f4);
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  animation: buttonAnimation 2s alternate linear infinite;
+  filter: blur(3px);
+}
+
+.formbtn:hover::before {
+  opacity: 1;
+}
