@@ -3,46 +3,51 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/styles/styles.css" />
+    <link rel="stylesheet" href="/styles/genre.css" />
     <title><%= genre.genre %> Books</title>
   </head>
   <body>
     <header>
       <div><%= genre.genre %> Books</div>
     </header>
-    <section>
-      <% if (books.length) { %> <% books.forEach((book) => { %>
-      <div>
-        <div><%= book.title %></div>
-        <div><%= book.pages %></div>
-      </div>
-      <% }) %> <% } else { %>
-      <div>No Books for the "<%= genre.genre %>" genre.</div>
-      <% } %>
-    </section>
-    <section>
-      <button>+</button>
-      <div>Update Genre</div>
-      <form action="/genre/<%= genre.id %>" method="POST">
-        <label for="updated_genre">Genre:</label>
-        <input
-          type="text"
-          id="updated_genre"
-          name="updated_genre"
-          value="<%= genre.genre %>"
-          required
-        />
-        <label for="update_password">Password:</label>
-        <input type="password" name="password" id="update_password" />
-        <button type="submit">Submit Genre</button>
-      </form>
-    </section>
-    <section>
-      <form action="/genre/<%= genre.id %>/delete" method="POST">
-        <button type="submit">-</button>
-        <label for="delete_password">Password:</label>
-        <input type="password" name="password" id="delete_password" />
+    <main>
+      <section>
+        <% if (books.length) { %> <% books.forEach((book) => { %>
+        <div>
+          <div><%= book.title %></div>
+          <div><%= book.pages %></div>
+        </div>
+        <% }) %> <% } else { %>
+        <div>No Books for the "<%= genre.genre %>" genre.</div>
+        <% } %>
+      </section>
+      <section>
+        <button>+</button>
+        <div>Update Genre</div>
+        <form action="/genre/<%= genre.id %>" method="POST">
+          <label for="updated_genre">Genre:</label>
+          <input
+            type="text"
+            id="updated_genre"
+            name="updated_genre"
+            value="<%= genre.genre %>"
+            required
+          />
+          <label for="update_password">Password:</label>
+          <input type="password" name="password" id="update_password" />
+          <button type="submit">Submit Genre</button>
+        </form>
+      </section>
+      <section>
+        <button>-</button>
         <div>Delete Genre</div>
-      </form>
-    </section>
+        <form action="/genre/<%= genre.id %>/delete" method="POST">
+          <label for="delete_password">Password:</label>
+          <input type="password" name="password" id="delete_password" />
+          <button type="submit">Confirm</button>
+        </form>
+      </section>
+    </main>
   </body>
 </html>
