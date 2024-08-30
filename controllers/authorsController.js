@@ -49,7 +49,7 @@ const updateAuthorPost = [
 ];
 
 async function deleteAuthorPost(req, res, next) {
-  if (req.body.password !== process.env.PWD) {
+  if (req.body.password !== process.env.PASSWD) {
     next(
       new customError(
         "Can't delete the author, the password is incorrect.",

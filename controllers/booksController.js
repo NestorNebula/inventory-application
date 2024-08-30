@@ -76,7 +76,7 @@ const updateBookPost = [
 ];
 
 async function deleteBookPost(req, res, next) {
-  if (req.body.password !== process.env.PWD) {
+  if (req.body.password !== process.env.PASSWD) {
     next(
       new customError(
         "Can't delete the book, the password is incorrect.",

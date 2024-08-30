@@ -49,7 +49,7 @@ const updateGenrePost = [
 ];
 
 async function deleteGenrePost(req, res, next) {
-  if (req.body.password !== process.env.PWD) {
+  if (req.body.password !== process.env.PASSWD) {
     next(
       new customError(
         "Can't delete the genre, the password is incorrect.",
