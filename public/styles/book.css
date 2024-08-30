@@ -10,3 +10,27 @@ section {
   border-radius: 5px;
   box-shadow: 1px 1px 3px rgba(173, 216, 230, 0.5);
 }
+
+.book-infos {
+  font-size: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.plot {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.author-pages {
+  display: flex;
+  justify-content: space-between;
+}
+
+.plot > div:last-child {
+  font-size: 1.75rem;
+  padding: 0 1rem;
+  font-style: italic;
+}
