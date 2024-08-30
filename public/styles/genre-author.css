@@ -30,3 +30,7 @@ section {
 .book-link {
   color: #172554;
 }
+
+.no-data {
+  font-size: 2rem;
+}

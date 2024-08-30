@@ -21,7 +21,7 @@
           <a class="book-link" href="/book/<%= book.id %>"><%= book.title %></a>
         </div>
         <% }) %> <% } else { %>
-        <div>No Books for the "<%= genre.genre %>" genre.</div>
+        <div class="no-data">No Books for the "<%= genre.genre %>" genre.</div>
         <% } %>
       </section>
       <section class="form-grid">
