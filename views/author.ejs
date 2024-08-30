@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/styles/styles.css" />
+    <link rel="stylesheet" href="/styles/genre-author.css">
     <script src="/scripts/forms.js" defer></script>
     <title><%= author.name %>'s Books</title>
   </head>
@@ -12,40 +13,42 @@
       <div><%= author.name %>'s Books</div>
     </header>
     <div class="background-font"></div>
-    <section class="books">
-      <% if (books.length) { %> <% books.forEach((book) => { %>
-      <div class="book">
-        <a class="book-link" href="/book/<%= book.id %>"><%= book.title %></a>
-      </div>
-      <% }) %> <% } else { %>
-      <div>No Books for "<%= author.name %>".</div>
-      <% } %>
-    </section>
-    <section class="form-grid">
-      <button class="plus-button opener" aria-label="open new book form"><img class="plusimg" src="/assets/icons/plus.png" alt=""></button>
-      <div>Update Author</div>
-      <form class="form dynamic hidden" action="/author/<%= author.id %>" method="POST">
-        <label for="updated_author">Author:</label>
-        <input
-          type="text"
-          name="updated_author"
-          id="updated_author"
-          value="<%= author.name %>"
-          required
-        />
-        <label for="update_password">Password:</label>
-        <input type="password" name="password" id="update_password" />
-        <button class="formbtn" type="submit">Submit Author</button>
-      </form>
-    </section>
-    <section class="form-grid">
-      <button class="minus-button opener" aria-label="open new book form"><img class="minusimg" src="/assets/icons/minus-sign.png" alt=""></button>
-      <div>Delete Author</div>
-      <form class="form dynamic hidden" action="/author/<%= author.id %>/delete" method="POST">
-        <label for="delete_password">Password:</label>
-        <input type="password" name="password" id="delete_password" />
-        <button class="formbtn" type="submit">Confirm</button>
-      </form>
-    </section>
+    <main>
+      <section class="books">
+        <% if (books.length) { %> <% books.forEach((book) => { %>
+        <div class="book">
+          <a class="book-link" href="/book/<%= book.id %>"><%= book.title %></a>
+        </div>
+        <% }) %> <% } else { %>
+        <div>No Books for "<%= author.name %>".</div>
+        <% } %>
+      </section>
+      <section class="form-grid">
+        <button class="plus-button opener" aria-label="open new book form"><img class="plusimg" src="/assets/icons/plus.png" alt=""></button>
+        <div>Update Author</div>
+        <form class="form dynamic hidden" action="/author/<%= author.id %>" method="POST">
+          <label for="updated_author">Author:</label>
+          <input
+            type="text"
+            name="updated_author"
+            id="updated_author"
+            value="<%= author.name %>"
+            required
+          />
+          <label for="update_password">Password:</label>
+          <input type="password" name="password" id="update_password" />
+          <button class="formbtn" type="submit">Submit Author</button>
+        </form>
+      </section>
+      <section class="form-grid">
+        <button class="minus-button opener" aria-label="open new book form"><img class="minusimg" src="/assets/icons/minus-sign.png" alt=""></button>
+        <div>Delete Author</div>
+        <form class="form dynamic hidden" action="/author/<%= author.id %>/delete" method="POST">
+          <label for="delete_password">Password:</label>
+          <input type="password" name="password" id="delete_password" />
+          <button class="formbtn" type="submit">Confirm</button>
+        </form>
+      </section>
+    </main>
   </body>
 </html>
