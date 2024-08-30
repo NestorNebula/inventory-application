@@ -54,6 +54,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 3rem;
+  min-height: 100vh;
 }
 
 header {
@@ -116,6 +117,7 @@ footer {
   gap: 0.5rem;
   font-size: 1.15rem;
   padding: 2rem 0;
+  margin-top: auto;
 }
 
 .footer-container > div:first-child {
@@ -143,7 +145,7 @@ footer {
   visibility: hidden;
   max-height: 0;
   opacity: 0;
-  display: block !important;
+  overflow: hidden;
 }
 
 /* Common Styles */
