@@ -14,15 +14,26 @@
     </header>
     <div class="background-font"></div>
     <main>
-      <section>
-        <div><%= book.pages %></div>
-        <div><%= book.plot %></div>
-        <a href="/author/<%= book.author_id %>"><%= author %></a>
+      <section class="book-infos">
+        <div class="author-pages">
+          <div>Written by <a href="/author/<%= book.author_id %>"><%= author %></a></div>
+          <div><%= book.pages %> pages</div>
+        </div>
+        <div class="plot">
+          <div>Plot:</div>
+        <% if (book.plot) { %>
+          <div><%= book.plot %></div> 
+        <% } else { %>
+          <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse mattis convallis magna quis tempus. Vestibulum ac ullamcorper lectus, in gravida augue. Pellentesque rhoncus, nisl a feugiat maximus, metus elit dictum quam, a auctor nisi diam a ante. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Mauris pretium odio purus, et convallis enim consequat quis. Aliquam ultricies accumsan enim sed aliquam. Vestibulum malesuada ligula in nulla tempus, nec maximus est consequat. Donec sed sagittis enim. Vivamus sed nibh posuere, fermentum libero lobortis, consectetur neque.</div>
+        <% } %>
+      </div>
         <div>
           <div>Genres:</div>
+          <ul>
           <% book_genres.forEach((genre) => { %>
-          <a href="/genre/<%= genre.genre_id %>"><%= genre.genre %></a>
+          <li><a href="/genre/<%= genre.genre_id %>"><%= genre.genre %></a></li>
           <% }) %>
+          </ul>
         </div>
       </section>
       <section class="form-grid">
