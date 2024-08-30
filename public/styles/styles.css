@@ -139,7 +139,7 @@ footer {
   content: '';
 }
 
-.credits .hidden {
+.hidden {
   visibility: hidden;
   max-height: 0;
   opacity: 0;
