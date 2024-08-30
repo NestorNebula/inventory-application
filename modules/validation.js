@@ -11,13 +11,14 @@ const errorsMessage = {
   plotLengthErr: 'The plot length must be between 1000 characters maximum.',
   pagesNumErr: 'Pages must be a number.',
   passwordErr: 'Password is incorrect.',
+  noGenreErr: 'You must select at least one genre.',
 };
 
 const validations = {
   validateNewGenre: [
     body('newgenre')
       .trim()
-      .isAlpha()
+      .isAlpha('en-US', { ignore: ' ' })
       .withMessage(errorsMessage.genreAlphaErr)
       .isLength({ min: 5, max: 20 })
       .withMessage(errorsMessage.genreLengthErr),
@@ -25,18 +26,18 @@ const validations = {
   validateUpdatedGenre: [
     body('updated_genre')
       .trim()
-      .isAlpha()
+      .isAlpha('en-US', { ignore: ' ' })
       .withMessage(errorsMessage.genreAlphaErr)
       .isLength({ min: 5, max: 20 })
       .withMessage(errorsMessage.genreLengthErr),
     body('password')
-      .equals(process.env.PWD)
+      .equals(process.env.PASSWD)
       .withMessage(errorsMessage.passwordErr),
   ],
   validateNewAuthor: [
     body('newauthor')
       .trim()
-      .isAlpha()
+      .isAlpha('en-US', { ignore: ' ' })
       .withMessage(errorsMessage.authorAlphaErr)
       .isLength({ min: 5, max: 25 })
       .withMessage(errorsMessage.authorLengthErr),
@@ -44,12 +45,12 @@ const validations = {
   validateUpdatedAuthor: [
     body('updated_author')
       .trim()
-      .isAlpha()
+      .isAlpha('en-US', { ignore: ' ' })
       .withMessage(errorsMessage.authorAlphaErr)
       .isLength({ min: 5, max: 25 })
       .withMessage(errorsMessage.authorLengthErr),
     body('password')
-      .equals(process.env.PWD)
+      .equals(process.env.PASSWD)
       .withMessage(errorsMessage.passwordErr),
   ],
   validateBook: [
@@ -64,7 +65,7 @@ const validations = {
       .blacklist('<>')
       .isLength({ max: 1000 })
       .withMessage(errorsMessage.plotLengthErr),
-    body('book_genres').not().isEmpty(),
+    body('book_genres').not().isEmpty().withMessage(errorsMessage.noGenreErr),
   ],
   validateUpdatedBook: [
     body('title')
@@ -78,9 +79,9 @@ const validations = {
       .blacklist('<>')
       .isLength({ max: 1000 })
       .withMessage(errorsMessage.plotLengthErr),
-    body('book_genres').not().isEmpty(),
+    body('book_genres').not().isEmpty().withMessage(errorsMessage.noGenreErr),
     body('password')
-      .equals(process.env.PWD)
+      .equals(process.env.PASSWD)
       .withMessage(errorsMessage.passwordErr),
   ],
 };
