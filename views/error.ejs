@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/styles/styles.css" />
+    <link rel="stylesheet" href="/styles/error.css" />
     <title><%= `${error.statusCode} ${error.title}` %></title>
   </head>
   <body>
@@ -13,11 +14,12 @@
         <div><%= error.title %></div>
         <div><%= error.message %></div>
       </section>
-      <section class="error-links">
-        <% if (error.statusCode === 404) { %>
-          <a href="/">Return to Homepage</a>
+      <section class="error-link">
+        <% if (error.statusCode !== 404) { %>
+          <div>Feel free to <a class="issue" href="https://github.com/NestorNebula/inventory-application/issues">Open an Issue</a> if you think the error isn't normal.</div>
         <% } %>
       </section>
+      <a class="return-link" href="/">Return to Homepage</a>
     </main>
   </body>
 </html>
