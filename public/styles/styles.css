@@ -82,6 +82,10 @@ textarea {
   padding: 0.25rem;
 }
 
+textarea {
+  resize: none;
+}
+
 a {
   color: #0c4a6e;
   text-decoration: none;
