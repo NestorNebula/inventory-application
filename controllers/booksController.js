@@ -24,6 +24,7 @@ async function getBook(req, res, next) {
         id: req.params.book,
         book: results[0],
         book_genres: results,
+        author: results[0].name,
         genres: values[0],
         authors: values[1],
       });

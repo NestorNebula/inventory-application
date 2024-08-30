@@ -17,7 +17,7 @@
       <section>
         <div><%= book.pages %></div>
         <div><%= book.plot %></div>
-        <a href="/author/<%= book.author_id %>"><%= book.author_id %></a>
+        <a href="/author/<%= book.author_id %>"><%= author %></a>
         <div>
           <div>Genres:</div>
           <% book_genres.forEach((genre) => { %>
