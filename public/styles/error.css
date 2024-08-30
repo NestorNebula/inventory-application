@@ -1,0 +1,36 @@
+main {
+  height: 100vh;
+  display: grid;
+  place-content: center;
+  text-align: center;
+  grid-template-rows: 1fr auto;
+  align-items: center;
+}
+
+.issue {
+  animation: errorLink 1s ease-out alternate infinite;
+}
+
+.error-details div:first-child {
+  font-size: 5rem;
+  padding: 3rem;
+}
+
+.error-details div:last-child {
+  font-size: 4rem;
+}
+
+.error-link,
+.return-link {
+  padding: 3rem;
+  font-size: 3rem;
+}
+
+@keyframes errorLink {
+  from {
+    font-size: 3rem;
+  }
+  to {
+    font-size: 3.3rem;
+  }
+}
