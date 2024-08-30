@@ -69,7 +69,7 @@ async function getAuthorByName(author) {
 
 async function getBooksByAuthor(id) {
   const { rows } = await pool.query(
-    'SELECT * FROM books AS b INNER JOIN authors AS a ON b.author_id = a.id WHERE b.author_id = $1',
+    'SELECT b.id, title, pages, plot, author_id, name FROM books AS b INNER JOIN authors AS a ON b.author_id = a.id WHERE b.author_id = $1',
     [id]
   );
   return rows;
