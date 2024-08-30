@@ -3,13 +3,21 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/styles/styles.css" />
     <title><%= `${error.statusCode} ${error.title}` %></title>
   </head>
   <body>
-    <div><%= error.title %></div>
-    <div><%= error.message %></div>
-    <% if (error.statusCode === 404) { %>
-    <a href="/">Return to Homepage</a>
-    <% } %>
+    <div class="background-font"></div>
+    <main>
+      <section class="error-details">
+        <div><%= error.title %></div>
+        <div><%= error.message %></div>
+      </section>
+      <section class="error-links">
+        <% if (error.statusCode === 404) { %>
+          <a href="/">Return to Homepage</a>
+        <% } %>
+      </section>
+    </main>
   </body>
 </html>
