@@ -80,7 +80,6 @@ const createAuthorPost = [
       return;
     }
     const { newauthor } = req.body;
-    await db.insertAuthor(newauthor);
     const same = await db.getAuthorByName(newauthor);
     if (same.length > 0) {
       next(
