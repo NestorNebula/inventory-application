@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/styles/genre-author.css" />
     <script src="/scripts/forms.js" defer></script>
     <title><%= genre.genre %> Books</title>
-    <link rel="icon" type="image/png" href="/assets/icons/inventory.png">
+    <link rel="icon" type="image/png" href="/assets/icons/inventory.png" />
   </head>
   <body>
     <header>
@@ -25,9 +25,15 @@
         <% } %>
       </section>
       <section class="form-grid">
-        <button class="plus-button opener" aria-label="open new book form"><img class="plusimg" src="/assets/icons/plus.png" alt=""></button>
+        <button class="plus-button opener" aria-label="open new book form">
+          <img class="plusimg" src="/assets/icons/plus.png" alt="" />
+        </button>
         <div>Update Genre</div>
-        <form class="form dynamic hidden" action="/genre/<%= genre.id %>" method="POST">
+        <form
+          class="form dynamic hidden"
+          action="/genre/<%= genre.id %>"
+          method="POST"
+        >
           <label for="updated_genre">Genre:</label>
           <input
             type="text"
@@ -42,9 +48,15 @@
         </form>
       </section>
       <section class="form-grid">
-        <button class="minus-button opener" aria-label="open new book form"><img class="minusimg" src="/assets/icons/minus-sign.png" alt=""></button>
+        <button class="minus-button opener" aria-label="open new book form">
+          <img class="minusimg" src="/assets/icons/minus-sign.png" alt="" />
+        </button>
         <div>Delete Genre</div>
-        <form class="form dynamic hidden" action="/genre/<%= genre.id %>/delete" method="POST">
+        <form
+          class="form dynamic hidden"
+          action="/genre/<%= genre.id %>/delete"
+          method="POST"
+        >
           <label for="delete_password">Password:</label>
           <input type="password" name="password" id="delete_password" />
           <button class="formbtn" type="submit">Confirm</button>
