@@ -146,6 +146,7 @@ Noa Houssier - [Github](https://github.com/NestorNebula)
 Project:
 
 - [Repository](https://github.com/NestorNebula/inventory-application)
+- [Link](https://inventory-application-2x7e.onrender.com)
 
 ## Acknoledgements
 
