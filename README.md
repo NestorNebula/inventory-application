@@ -5,7 +5,7 @@
         <img src="./public/assets/icons/inventory.png" alt="Project Logo" width="100" height="100" />
     </a>
     
-<h3 style="color: darkcyan">Inventory Application</h3>
+<h3>Inventory Application</h3>
 </div>
 
 ## Description
@@ -43,84 +43,70 @@ This is a guide to run this project locally.
 
 ### Installation
 
-<a id="installation" />
+<a id="installation"></a>
 
 1. Fork the repository
-
 2. Clone the forked repository to your local machine
-
-```
-git clone git@github.com:<your username>/<repo name>.git
-```
-
+   ```
+   git clone git@github.com:<your username>/<repo name>.git
+   ```
 3. Update remote URL
 
-```
-# SSH:
-git remote add upstream git@github.com:inventory-application/<repo name>.git
+   ```
+   # SSH:
+   git remote add upstream git@github.com:inventory-application/<repo name>.git
 
-# HTTPS:
-git remote add upstream https://github.com/inventory-application/<repo name>.git
-```
+   # HTTPS:
+   git remote add upstream https://github.com/inventory-application/<repo name>.git
+   ```
 
 4. Install required packages
-
-```
-npm install
-```
-
+   ```
+   npm install
+   ```
 5. Create a postgreSQL database
-
 6. Create a .env file in the project root directory with the following keys
+   ```
+   PORT=8080
+   LOCAL_DB (or PRODUCTION_DB)=postgresql://<role_name>:<role_password>@localhost:5432/<your_db_name>
+   PASSWD=<any_password> (This will be the password you will use for updating and deleting items/categories)
+   ```
+7. If you've set a local db key previously, make sure to update the following files. (This isn't needed if you've just updated the production db key)
 
-```
-PORT=8080
-LOCAL_DB (or PRODUCTION_DB)=postgresql://<role_name>:<role_password>@localhost:5432/<your_db_name>
-PASSWD=<any_password> (This will be the password you will use for updating and deleting items/categories)
-```
+   ```
+   # Files: ./db/populatedb.js and ./db/pool.js
 
-7. If you've set a LOCAL_DB key previously, make sure to update the following files. (This isn't needed if you've just updated the PRODUCTION_DB key)
-
-```
-# Files: ./db/populatedb.js and ./db/pool.js
-
-Replace process.env.PRODUCTION_DB by process.env.LOCAL_DB
-```
+   Replace process.env.PRODUCTION_DB by process.env.LOCAL_DB
+   ```
 
 8.
 
 - Go to the populatedb file
+  ```
+  # From route directory
+  ./db/populatedb.js
+  ```
+- In the `SQL` variable, you can see the code that will create all the tables. In the insert queries you can add some data to populate your db (If you don't wish to add data, make sure to delete the insert statements to avoid error when populating the db.)
 
-```
-# From route directory
-./db/populatedb.js
-```
+  ```
+  # The lines where you can add data should look like this:
+  INSERT INTO books (title, pages, plot, author_id)
+  VALUES
+   /* Add Books here */
 
-- In the `SQL` variable, you can see the code that will create all the tables. In the insert queries you can add some data to populate your db
+  # Example:
 
-```
-# The lines where you can add data should look like this:
+  INSERT INTO books (title, pages, plot, author_id)
+  VALUES
+   ('My own book', 300, 'An interesting plot', <any existing author_id or NULL>)
 
-INSERT INTO books (title, pages, plot, author_id)
-VALUES
-  /* Add Books here */
-
-# Example:
-
-INSERT INTO books (title, pages, plot, author_id)
-VALUES
-  ('My own book', 300, 'An interesting plot', <any existing author_id or NULL>)
-
-(Make sure to read ./modules/validation.js and the db contrainsts before running this)
-```
-
-If you don't wish to add data, make sure to delete the insert statements to avoid error when populating the db.
+  (Make sure to read ./modules/validation.js and the db contrainsts before running this)
+  ```
 
 9. Finally, you can populate the db by running the populatedb file.
-
-```
-node ./db/populatedb.js
-```
+   ```
+   node ./db/populatedb.js
+   ```
 
 If an error occurs, make sure you have done everything properly according to this guide. If you think so, you can <a href="https://github.com/NestorNebula/inventory-application/issues">Open an Issue</a>.
 
@@ -130,13 +116,13 @@ If you run this project locally, make sure that you have followed all steps in <
 
 - Open the app.
 
-```
-# If you run this project locally
+  ```
+  # If you run this project locally
 
-node --watch app.js
+  node --watch app.js
 
-Then search http://localhost:8080/ in you browser.
-```
+  Then search http://localhost:8080/ in you browser.
+  ```
 
 Once the app is opened, you can navigate through the different pages.
 
