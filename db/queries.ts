@@ -1,4 +1,5 @@
 import pool from './pool';
+import { Author, Genre, Book } from '../modules/types';
 
 // GENERAL QUERIES
 async function getAllGenres() {
@@ -33,7 +34,7 @@ async function getBooksByGenre(id: number) {
   return rows;
 }
 
-async function updateGenre(genre) {
+async function updateGenre(genre: Genre) {
   await pool.query('UPDATE genres SET genre = $1 WHERE id = $2', [
     genre.genre,
     genre.id,
@@ -75,7 +76,7 @@ async function getBooksByAuthor(id: number) {
   return rows;
 }
 
-async function updateAuthor(author) {
+async function updateAuthor(author: Author) {
   await pool.query('UPDATE authors SET name = $1 WHERE id = $2', [
     author.name,
     author.id,
@@ -107,7 +108,7 @@ async function getBookByTitle(book: string) {
   return rows;
 }
 
-async function updateBook(book) {
+async function updateBook(book: Book) {
   await pool.query(
     'UPDATE books SET title = $1, pages = $2, plot = $3, author_id = $4 WHERE id = $5',
     [book.title, book.pages, book.plot, book.author_id, book.id]
@@ -118,7 +119,7 @@ async function deleteBook(id: number) {
   await pool.query('DELETE FROM books WHERE id = $1', [id]);
 }
 
-async function insertBook(book) {
+async function insertBook(book: Book) {
   await pool.query(
     'INSERT INTO books (title, pages, plot, author_id) VALUES ($1, $2, $3, $4)',
     [book.title, book.pages, book.plot, book.author_id]
