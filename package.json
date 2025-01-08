@@ -2,7 +2,7 @@
   "name": "inventory-application",
   "version": "1.0.0",
   "description": "An inventory app",
-  "main": "app.js",
+  "main": "app.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -22,5 +22,8 @@
     "express": "^4.19.2",
     "express-validator": "^7.2.0",
     "pg": "^8.12.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.5"
   }
 }
