@@ -1,7 +1,7 @@
-const { body } = require('express-validator');
+import { body, Result } from 'express-validator';
 require('dotenv').config();
 
-const errorsMessage = {
+const errorsMessage: { [key: string]: string } = {
   genreAlphaErr: 'The genre must only contain letters.',
   genreLengthErr: "The genre's length must be between 5 and 20 characters.",
   authorAlphaErr: 'The author must only contain letters.',
@@ -31,7 +31,7 @@ const validations = {
       .isLength({ min: 5, max: 20 })
       .withMessage(errorsMessage.genreLengthErr),
     body('password')
-      .equals(process.env.PASSWD)
+      .equals(process.env.PASSWD!)
       .withMessage(errorsMessage.passwordErr),
   ],
   validateNewAuthor: [
@@ -50,7 +50,7 @@ const validations = {
       .isLength({ min: 5, max: 25 })
       .withMessage(errorsMessage.authorLengthErr),
     body('password')
-      .equals(process.env.PASSWD)
+      .equals(process.env.PASSWD!)
       .withMessage(errorsMessage.passwordErr),
   ],
   validateBook: [
@@ -81,18 +81,15 @@ const validations = {
       .withMessage(errorsMessage.plotLengthErr),
     body('book_genres').not().isEmpty().withMessage(errorsMessage.noGenreErr),
     body('password')
-      .equals(process.env.PASSWD)
+      .equals(process.env.PASSWD!)
       .withMessage(errorsMessage.passwordErr),
   ],
 };
 
-const getErrorMessage = (errors) => {
+const getErrorMessage = (errors: Result) => {
   const errorList = errors.array();
   const messages = errorList.map((error) => error.msg);
   return messages.join(' ');
 };
 
-module.exports = {
-  validations,
-  getErrorMessage,
-};
+export { validations, getErrorMessage };
