@@ -1,4 +1,4 @@
-const pool = require('./pool');
+import pool from './pool';
 
 // GENERAL QUERIES
 async function getAllGenres() {
@@ -12,12 +12,12 @@ async function getAllAuthors() {
 }
 
 // GENRES QUERIES
-async function getGenre(id) {
+async function getGenre(id: number) {
   const { rows } = await pool.query('SELECT * FROM genres WHERE id = $1', [id]);
   return rows;
 }
 
-async function getGenreByName(genre) {
+async function getGenreByName(genre: string) {
   const { rows } = await pool.query(
     "SELECT * FROM genres WHERE genre ILIKE '%' || $1 || '%'",
     [genre]
@@ -25,7 +25,7 @@ async function getGenreByName(genre) {
   return rows;
 }
 
-async function getBooksByGenre(id) {
+async function getBooksByGenre(id: number) {
   const { rows } = await pool.query(
     'SELECT * FROM books AS b INNER JOIN books_genres AS bg ON b.id = bg.book_id WHERE bg.genre_id = $1',
     [id]
@@ -40,11 +40,11 @@ async function updateGenre(genre) {
   ]);
 }
 
-async function deleteGenre(id) {
+async function deleteGenre(id: number) {
   await pool.query('DELETE FROM genres WHERE id = $1', [id]);
 }
 
-async function insertGenre(genre) {
+async function insertGenre(genre: string) {
   await pool.query(
     "INSERT INTO genres (genre, image) VALUES ($1, 'template.jpg')",
     [genre]
@@ -52,14 +52,14 @@ async function insertGenre(genre) {
 }
 
 // AUTHORS QUERIES
-async function getAuthor(id) {
+async function getAuthor(id: number) {
   const { rows } = await pool.query('SELECT * FROM authors WHERE id = $1', [
     id,
   ]);
   return rows;
 }
 
-async function getAuthorByName(author) {
+async function getAuthorByName(author: string) {
   const { rows } = await pool.query(
     "SELECT * FROM authors WHERE name ILIKE '%' || $1 || '%'",
     [author]
@@ -67,7 +67,7 @@ async function getAuthorByName(author) {
   return rows;
 }
 
-async function getBooksByAuthor(id) {
+async function getBooksByAuthor(id: number) {
   const { rows } = await pool.query(
     'SELECT b.id, title, pages, plot, author_id, name FROM books AS b INNER JOIN authors AS a ON b.author_id = a.id WHERE b.author_id = $1',
     [id]
@@ -82,16 +82,16 @@ async function updateAuthor(author) {
   ]);
 }
 
-async function deleteAuthor(id) {
+async function deleteAuthor(id: number) {
   await pool.query('DELETE FROM authors WHERE id = $1', [id]);
 }
 
-async function insertAuthor(author) {
+async function insertAuthor(author: string) {
   await pool.query('INSERT INTO authors (name) VALUES ($1)', [author]);
 }
 
 // BOOKS QUERIES
-async function getBookInformations(id) {
+async function getBookInformations(id: number) {
   const { rows } = await pool.query(
     'SELECT title, pages, plot, author_id, genre_id, genre, name FROM books AS b LEFT JOIN books_genres AS bg ON b.id = bg.book_id LEFT JOIN genres AS g ON bg.genre_id = g.id LEFT JOIN authors AS a ON b.author_id = a.id WHERE b.id = $1',
     [id]
@@ -99,7 +99,7 @@ async function getBookInformations(id) {
   return rows;
 }
 
-async function getBookByTitle(book) {
+async function getBookByTitle(book: string) {
   const { rows } = await pool.query(
     "SELECT * FROM books WHERE title ILIKE '%' || $1 || '%'",
     [book]
@@ -114,7 +114,7 @@ async function updateBook(book) {
   );
 }
 
-async function deleteBook(id) {
+async function deleteBook(id: number) {
   await pool.query('DELETE FROM books WHERE id = $1', [id]);
 }
 
@@ -124,36 +124,36 @@ async function insertBook(book) {
     [book.title, book.pages, book.plot, book.author_id]
   );
 }
-async function removeAuthorFromBooks(authorId) {
+async function removeAuthorFromBooks(authorId: number) {
   await pool.query('UPDATE books SET author_id = NULL WHERE author_id = $1', [
     authorId,
   ]);
 }
 
 // BOOKS_GENRES TABLE QUERIES
-async function deleteOldGenre(bookId, newGenres) {
+async function deleteOldGenre(bookId: number, newGenres: string[]) {
   await pool.query(
     'DELETE FROM books_genres WHERE book_id = $1 AND genre_id != ALL ($2)',
     [bookId, newGenres]
   );
 }
 
-async function deleteBookFromGenres(bookId) {
+async function deleteBookFromGenres(bookId: number) {
   await pool.query('DELETE FROM books_genres WHERE book_id = $1', [bookId]);
 }
 
-async function deleteGenreFromBooks(genreId) {
+async function deleteGenreFromBooks(genreId: number) {
   await pool.query('DELETE FROM books_genres WHERE genre_id = $1', [genreId]);
 }
 
-async function insertBookGenre(bookId, genreId) {
+async function insertBookGenre(bookId: number, genreId: number) {
   await pool.query(
     'INSERT INTO books_genres (book_id, genre_id) VALUES ($1, $2) ON CONFLICT (book_id, genre_id) DO NOTHING',
     [bookId, genreId]
   );
 }
 
-module.exports = {
+export {
   getAllGenres,
   getAllAuthors,
   getGenre,
