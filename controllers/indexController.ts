@@ -1,7 +1,8 @@
-const db = require('../db/queries');
-const customError = require('../modules/error');
+import * as db from '../db/queries';
+import customError from '../modules/error';
+import { NextFunction, Request, Response } from 'express';
 
-function getIndexPage(req, res, next) {
+function getIndexPage(req: Request, res: Response, next: NextFunction) {
   const genres = db.getAllGenres();
   const authors = db.getAllAuthors();
   Promise.all([genres, authors])
@@ -29,4 +30,4 @@ function getIndexPage(req, res, next) {
     });
 }
 
-module.exports = { getIndexPage };
+export default { getIndexPage };
