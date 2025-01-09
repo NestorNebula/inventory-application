@@ -4,8 +4,8 @@
   "description": "An inventory app",
   "main": "app.ts",
   "scripts": {
-    "build": "npx tsc",
-    "start": "node dist/index.js",
+    "build": "npx tsc && ts-node modules/writeViews.ts",
+    "start": "node dist/app.js",
     "dev": "nodemon app.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -29,7 +29,9 @@
   "devDependencies": {
     "@types/express": "^5.0.0",
     "@types/pg": "^8.11.10",
+    "@types/shelljs": "^0.8.15",
     "nodemon": "^3.1.9",
+    "shelljs": "^0.8.5",
     "ts-node": "^10.9.2"
   }
 }
