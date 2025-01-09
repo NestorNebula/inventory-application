@@ -18,10 +18,17 @@ The app has items (books) and categories (genres, authors).
 
 Users can create, read, update and delete any of these items/categories. (For security reasons, unknown users will only be able to create and read objects).
 
+#### Updates
+
+🟢 January 2025
+
+- Update project main language from JavaScript to TypeScript
+
 ### Built With
 
 [![NodeJS](https://skillicons.dev/icons?i=nodejs&theme=light)](https://nodejs.org/)
 [![Express](https://skillicons.dev/icons?i=express&theme=light)](https://expressjs.com/)
+[![TypeScript](https://skillicons.dev/icons?i=typescript)](https://typescriptlang.org/)
 [![PostgreSQL](https://skillicons.dev/icons?i=postgresql&theme=light)](https://www.postgresql.org/)
 
 #### And
@@ -33,7 +40,7 @@ Users can create, read, update and delete any of these items/categories. (For se
 
 ## Getting Started
 
-This is a guide to run this project locally.
+This is a guide to run the project locally.
 
 ### Prerequisites
 
@@ -74,38 +81,40 @@ This is a guide to run this project locally.
 7. If you've set a local db key previously, make sure to update the following files. (This isn't needed if you've just updated the production db key)
 
    ```
-   # Files: ./db/populatedb.js and ./db/pool.js
+   # Files: db/populatedb.ts and db/pool.ts
 
    Replace process.env.PRODUCTION_DB by process.env.LOCAL_DB
    ```
 
-8.
+8. Go to the populatedb file
 
-- Go to the populatedb file
-  ```
-  # From route directory
-  ./db/populatedb.js
-  ```
-- In the `SQL` variable, you can see the code that will create all the tables. In the insert queries you can add some data to populate your db (If you don't wish to add data, make sure to delete the insert statements to avoid error when populating the db.)
+   ```
+   # From route directory
+   db/populatedb.ts
+   ```
 
-  ```
-  # The lines where you can add data should look like this:
-  INSERT INTO books (title, pages, plot, author_id)
-  VALUES
+   - In the `SQL` variable, you can see the code that will create all the tables. In the insert queries you can add some data to populate your db (If you don't wish to add data, make sure to delete the insert statements to avoid errors when populating the db.)
+
+   ```
+   // The lines where you can add data should look like this:
+   INSERT INTO books (title, pages, plot, author_id)
+   VALUES
    /* Add Books here */
 
-  # Example:
+   // Example:
 
-  INSERT INTO books (title, pages, plot, author_id)
-  VALUES
-   ('My own book', 300, 'An interesting plot', <any existing author_id or NULL>)
+   INSERT INTO books (title, pages, plot, author_id)
+   VALUES
+   ('My own book', 300, 'An interesting plot', <author_id>)
 
-  (Make sure to read ./modules/validation.js and the db contrainsts before running this)
-  ```
-
-9. Finally, you can populate the db by running the populatedb file.
+   (Make sure to read modules/validation.ts and the db contrainsts before adding data)
    ```
-   node ./db/populatedb.js
+
+9. Finally, you can populate your db by running the following commands.
+   ```
+   tsc db/populatedb.ts
+   node db/populatedb.js
+   // The generated js file can safely be deleted after the operation
    ```
 
 If an error occurs, make sure you have done everything properly according to this guide. If you think so, you can <a href="https://github.com/NestorNebula/inventory-application/issues">Open an Issue</a>.
@@ -117,14 +126,11 @@ If you run this project locally, make sure that you have followed all steps in <
 - Open the app.
 
   ```
-  # If you run this project locally
-
-  node --watch app.js
-
-  Then search http://localhost:8080/ in you browser.
+  npm run dev
   ```
 
-Once the app is opened, you can navigate through the different pages.
+- Search http://localhost:8080/ in you browser.
+  Once the app is opened, you can navigate through the different pages.
 
 - In the Index page, you will be able to create new books, genres and authors.
 - If you are running this project locally, in author/genre/book pages, you will be able to change their information or to delete them using the password you should have set.
@@ -142,11 +148,6 @@ If you find an issue within the app, you can <a href="https://github.com/NestorN
 ## Contact
 
 Noa Houssier - [Github](https://github.com/NestorNebula)
-
-Project:
-
-- [Repository](https://github.com/NestorNebula/inventory-application)
-- [Link](https://inventory-application-2x7e.onrender.com)
 
 ## Acknoledgements
 
