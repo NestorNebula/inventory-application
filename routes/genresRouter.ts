@@ -1,10 +1,10 @@
-const { Router } = require('express');
+import { Router } from 'express';
 const genresRouter = Router();
-const genresController = require('../controllers/genresController');
+import genresController from '../controllers/genresController';
 
 genresRouter.get('/:genre', genresController.getGenre);
 genresRouter.post('/:genre', genresController.updateGenrePost);
 genresRouter.post('/:genre/delete', genresController.deleteGenrePost);
 genresRouter.post('/', genresController.createGenrePost);
 
-module.exports = genresRouter;
+export default genresRouter;
