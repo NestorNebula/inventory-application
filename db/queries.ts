@@ -2,23 +2,23 @@ import pool from './pool';
 import { Author, Genre, Book } from '../modules/types';
 
 // GENERAL QUERIES
-async function getAllGenres() {
+async function getAllGenres(): Promise<Genre[]> {
   const { rows } = await pool.query('SELECT * FROM genres ORDER BY genre');
   return rows;
 }
 
-async function getAllAuthors() {
+async function getAllAuthors(): Promise<Author[]> {
   const { rows } = await pool.query('SELECT * FROM authors ORDER BY name');
   return rows;
 }
 
 // GENRES QUERIES
-async function getGenre(id: number) {
+async function getGenre(id: number): Promise<Genre[]> {
   const { rows } = await pool.query('SELECT * FROM genres WHERE id = $1', [id]);
   return rows;
 }
 
-async function getGenreByName(genre: string) {
+async function getGenreByName(genre: string): Promise<Genre[]> {
   const { rows } = await pool.query(
     "SELECT * FROM genres WHERE genre ILIKE '%' || $1 || '%'",
     [genre]
@@ -26,7 +26,7 @@ async function getGenreByName(genre: string) {
   return rows;
 }
 
-async function getBooksByGenre(id: number) {
+async function getBooksByGenre(id: number): Promise<Book[]> {
   const { rows } = await pool.query(
     'SELECT * FROM books AS b INNER JOIN books_genres AS bg ON b.id = bg.book_id WHERE bg.genre_id = $1',
     [id]
@@ -53,14 +53,14 @@ async function insertGenre(genre: string) {
 }
 
 // AUTHORS QUERIES
-async function getAuthor(id: number) {
+async function getAuthor(id: number): Promise<Author[]> {
   const { rows } = await pool.query('SELECT * FROM authors WHERE id = $1', [
     id,
   ]);
   return rows;
 }
 
-async function getAuthorByName(author: string) {
+async function getAuthorByName(author: string): Promise<Author[]> {
   const { rows } = await pool.query(
     "SELECT * FROM authors WHERE name ILIKE '%' || $1 || '%'",
     [author]
@@ -68,7 +68,7 @@ async function getAuthorByName(author: string) {
   return rows;
 }
 
-async function getBooksByAuthor(id: number) {
+async function getBooksByAuthor(id: number): Promise<Book[]> {
   const { rows } = await pool.query(
     'SELECT b.id, title, pages, plot, author_id, name FROM books AS b INNER JOIN authors AS a ON b.author_id = a.id WHERE b.author_id = $1',
     [id]
@@ -92,7 +92,7 @@ async function insertAuthor(author: string) {
 }
 
 // BOOKS QUERIES
-async function getBookInformations(id: number) {
+async function getBookInformations(id: number): Promise<Book[]> {
   const { rows } = await pool.query(
     'SELECT title, pages, plot, author_id, genre_id, genre, name FROM books AS b LEFT JOIN books_genres AS bg ON b.id = bg.book_id LEFT JOIN genres AS g ON bg.genre_id = g.id LEFT JOIN authors AS a ON b.author_id = a.id WHERE b.id = $1',
     [id]
@@ -100,7 +100,7 @@ async function getBookInformations(id: number) {
   return rows;
 }
 
-async function getBookByTitle(book: string) {
+async function getBookByTitle(book: string): Promise<Book[]> {
   const { rows } = await pool.query(
     "SELECT * FROM books WHERE title ILIKE '%' || $1 || '%'",
     [book]
