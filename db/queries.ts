@@ -92,7 +92,7 @@ async function insertAuthor(author: string) {
 }
 
 // BOOKS QUERIES
-async function getBookInformations(id: number): Promise<Book[]> {
+async function getBookInformations(id: number): Promise<(Book & Author)[]> {
   const { rows } = await pool.query(
     'SELECT title, pages, plot, author_id, genre_id, genre, name FROM books AS b LEFT JOIN books_genres AS bg ON b.id = bg.book_id LEFT JOIN genres AS g ON bg.genre_id = g.id LEFT JOIN authors AS a ON b.author_id = a.id WHERE b.id = $1',
     [id]
@@ -119,7 +119,12 @@ async function deleteBook(id: number) {
   await pool.query('DELETE FROM books WHERE id = $1', [id]);
 }
 
-async function insertBook(book: Book) {
+async function insertBook(book: {
+  title: string;
+  pages: number;
+  plot?: string;
+  author_id?: number;
+}) {
   await pool.query(
     'INSERT INTO books (title, pages, plot, author_id) VALUES ($1, $2, $3, $4)',
     [book.title, book.pages, book.plot, book.author_id]
