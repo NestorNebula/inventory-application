@@ -61,10 +61,10 @@ This is a guide to run the project locally.
 
    ```
    # SSH:
-   git remote add upstream git@github.com:inventory-application/<repo name>.git
+   git remote add upstream git@github.com:NestorNebula/inventory-application.git
 
    # HTTPS:
-   git remote add upstream https://github.com/inventory-application/<repo name>.git
+   git remote add upstream https://github.com/NestorNebula/inventory-application.git
    ```
 
 4. Install required packages
